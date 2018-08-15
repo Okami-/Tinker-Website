@@ -7,17 +7,27 @@ module.exports = {
 	mode: "development",
 	module: {
 		rules: [
-		{
-			test: /\.(js|jsx)$/,
-			exclude: /node_modules/,
-			loader: 'babel-loader',
-			options: { presets: ['env'] }
-		},
-		{
-			test: /\.scss$/,
-			include: path.appSrc,
-			loaders: ["style", "css", "sass"]
-		},
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+				options: { presets: ['env'] }
+			},
+			{
+				test: /\.scss$/,
+				include: path.appSrc,
+				use: [
+					{
+						loader: "style-loader"
+					},
+					{
+						loader: "css-loader"
+					},
+					{
+						loader: "sass-loader"
+					}
+				]
+			},
 		]
 	},
 	resolve: { extensions: ['*', '.js', '.jsx'] },
