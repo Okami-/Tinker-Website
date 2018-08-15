@@ -1,6 +1,51 @@
-var STATES = [
-    'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
-    'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
-    'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
-    'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
-]
+import React, { Component } from 'react'
+
+import Field from './Field';
+import Button from './Button';
+
+
+class Form extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            email: '',
+            message: '',
+        };
+        this.updateField = this.updateField.bind(this);
+    }
+
+    updateField(field, value) {
+        this.setState({ [field]: value });
+    }
+
+    render() {
+        return (
+            <div>
+                
+                <Field
+                    label="Name"
+                    onChange={(event) => this.updateField('name', event.target.value)}
+                    value={this.state.name}
+                />
+                <Field 
+                    label="Email"
+                    onChange={(event) => this.updateField('email', event.target.value)}
+                    value={this.state.email}
+                />
+                <Field 
+                    label="Message"
+                    onChange={(event) => this.updateField('message', event.target.value)}
+                    textarea={true}
+                    value={this.state.message}
+                />
+                <Button 
+                    email="richiebkr@gmail.com"
+                    formValues={this.state}
+                />
+            </div>
+        );
+    }
+}
+
+export default Form;
