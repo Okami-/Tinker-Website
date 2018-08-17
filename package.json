@@ -4,8 +4,8 @@
   "description": "Website for Tinker",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
-    "dev-server": "nodemon ./server/server.js localhost 8080",
+    "start": "nodemon ./server/server.js & webpack-dev-server --mode development --open --hot",
+    "dev-server": "nodemon ./server/server.js localhost 3000",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,6 +31,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "nodemailer": "^4.6.8",
     "prop-types": "^15.6.2",

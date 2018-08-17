@@ -11,7 +11,7 @@ class ContactForm extends Component {
 
         axios({
             method: "POST",
-            url: "http://localhost:3002/send",
+            url: "http://localhost:3000/send",
             data: (
                 name: name,
                 email: email,
@@ -38,15 +38,15 @@ class ContactForm extends Component {
             <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
-                    <input type="text" className="form-control" id="name"/>
+                    <input type="text" className="form-control" id="name" name="name"/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail">Email Address</label>
-                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp"/>
+                    <input type="email" className="form-control" id="email" name="email" aria-describedby="emailHelp"/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="message">Message</label>
-                    <textarea className="form-control" rows="5" id="message"></textarea>
+                    <textarea className="form-control" rows="5" id="message" name="message"></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

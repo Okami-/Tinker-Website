@@ -40,11 +40,15 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: path.join(__dirname, "public/"),
-		port: 3000,
+		port: 8080,
 		proxy: {
-			"/api": "http://localhost:8080"
+			"*": {
+				target: "http://[::1]:3000",
+				changeOrigin: true,
+				secure: false
+			}
 		},
-		publicPath: "http://localhost:3000/dist/",
+		publicPath: "http://localhost:8080/public/",
 		hot: true
 	},
 	plugins: [ 

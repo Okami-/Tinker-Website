@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 const creds = require('../config/config');
+var bodyParser = require('body-parser');
+
+
 
 var transport = {
     host: 'smtp.gmail.com',
@@ -30,11 +33,11 @@ router.post('/send', (req, res, next) => {
 
     var mail = {
         from: name,
-        to: 'MY_EMAIL' // I'll include a email in here later
+        to: 'richiebkr@gmail.com', 
         subject: 'New Message from Tinker Website',
         text: content
     }
-
+    console.log(req.body.name)
     transporter.sendMail(mail, (err, data) => {
         if (err) {
             res.json({
@@ -48,4 +51,10 @@ router.post('/send', (req, res, next) => {
     })
 })
 
+
+
 module.exports = router;
+
+function newFunction(req) {
+    return req.body.name;
+}
