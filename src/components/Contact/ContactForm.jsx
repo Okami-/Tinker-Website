@@ -8,7 +8,6 @@ class ContactForm extends Component {
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
-
         axios({
             method: "POST",
             url: "http://localhost:3000/send",
@@ -35,21 +34,23 @@ class ContactForm extends Component {
 
     render() {
         return(
-            <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
+            <div>
+            <form id="contact-form" action="/send" actiononSubmit={this.handleSubmit.bind(this)} method="POST">
                 <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" className="form-control" id="name" name="name"/>
+                    <label for="name">Name</label>
+                    <input type="text" className="form-control" id="name" name="name" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail">Email Address</label>
+                    <label for="exampleInputEmail">Email Address</label>
                     <input type="email" className="form-control" id="email" name="email" aria-describedby="emailHelp"/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="message">Message</label>
-                    <textarea className="form-control" rows="5" id="message" name="message"></textarea>
+                    <label for="message">Message</label>
+                    <textarea className="form-control" rows="5" id="message" name="message" ></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+            </div>
         )
     }
 }

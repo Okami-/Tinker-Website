@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 const creds = require('../config/config');
-var bodyParser = require('body-parser');
 
 
 
@@ -26,10 +25,10 @@ transporter.verify((error, success) => {
 
 
 router.post('/send', (req, res, next) => {
-    var name = req.body.name
-    var email = req.body.email
-    var message = req.body.message
-    var content = `name: ${name} \n email: ${email} \n message: ${content} `
+    var name = req.body.name;
+    var email = req.body.email;
+    var message = req.body.message;
+    var content = `name: ${name} \n email: ${email} \n message: ${message} `;
 
     var mail = {
         from: name,
@@ -37,7 +36,7 @@ router.post('/send', (req, res, next) => {
         subject: 'New Message from Tinker Website',
         text: content
     }
-    console.log(req.body.name)
+    
     transporter.sendMail(mail, (err, data) => {
         if (err) {
             res.json({
@@ -54,7 +53,3 @@ router.post('/send', (req, res, next) => {
 
 
 module.exports = router;
-
-function newFunction(req) {
-    return req.body.name;
-}
