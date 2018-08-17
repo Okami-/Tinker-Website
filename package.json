@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
+    "dev-server": "nodemon ./server/server.js localhost 8080",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +20,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^1.0.0",
     "node-sass": "^4.9.2",
+    "nodemon": "^1.18.3",
     "react-hot-loader": "^4.3.4",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.22.1",

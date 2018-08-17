@@ -34,13 +34,16 @@ module.exports = {
 	},
 	resolve: { extensions: ['*', '.js', '.jsx'] },
 	output : {
-		path: path.resolve(__dirname, "dist/"),
-		publicPath: "/dist",
+		path: path.resolve(__dirname, "public/"),
+		publicPath: "src/assets/",
 		filename: "bundle.js"
 	},
 	devServer: {
 		contentBase: path.join(__dirname, "public/"),
-		port: 8080,
+		port: 3000,
+		proxy: {
+			"/api": "http://localhost:8080"
+		},
 		publicPath: "http://localhost:3000/dist/",
 		hot: true
 	},
