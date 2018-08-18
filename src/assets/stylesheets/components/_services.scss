@@ -1,0 +1,20 @@
+.services {
+    H2 {
+        width: 200px;
+        margin: 0 auto;
+        margin-bottom: 100px;
+    }
+    .service {
+        float: left;
+        width: 400px;
+        margin: 0px 100px 0px 100px;
+        h3 {
+            text-align: center;
+        }
+        p {
+            width: 400px;
+            text-align: center;
+        }
+    }
+    @include clearfix;
+}

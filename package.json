@@ -4,8 +4,8 @@
   "description": "Website for Tinker",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./server/server.js & webpack-dev-server --mode development --open --hot",
-    "dev-server": "nodemon ./server/server.js localhost 3000",
+    "start": "webpack-dev-server --mode development --open --hot",
+    "dev-server": "nodemon ./server/server.js localhost 8080",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,11 +19,14 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^1.0.0",
+    "file-loader": "^1.1.11",
     "node-sass": "^4.9.2",
     "nodemon": "^1.18.3",
     "react-hot-loader": "^4.3.4",
+    "resolve-url-loader": "^2.3.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.22.1",
+    "url-loader": "^1.1.1",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"

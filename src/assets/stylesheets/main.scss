@@ -1,1 +1,26 @@
-@import "components/App.scss";
+
+// Reset - base
+
+@import 'base/reset';
+
+// Variables
+
+@import 'helpers/variables';
+
+// Mixins
+
+@import 'helpers/mixins';
+
+// Typography
+
+@import "base/typography";
+
+// Layout
+
+@import "layouts/layout";
+// COMPONENTS
+
+
+@import "components/header";
+@import "components/banner";
+@import "components/services";

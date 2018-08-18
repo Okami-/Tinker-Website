@@ -4,6 +4,7 @@ class Services extends Component {
     render() {
         return (
             <div className="services">
+                <h2>SERVICES</h2>
                 <Service
                     serviceLogo="a"
                     serviceTitle="WEB DESIGN"

@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-
 module.exports = {
 	devtool: "source-map",
 	entry: "./src/index.jsx",
@@ -17,7 +16,7 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
-				include: path.appSrc,
+				//include: path.appSrc,
 				use: [
 					{
 						loader: "style-loader"
@@ -30,28 +29,47 @@ module.exports = {
 					}
 				]
 			},
+			{
+				test: /\.(png|jp(e*)g|svg)$/,  
+				use: [{
+					loader: 'url-loader',
+					options: { 
+						limit: 8000, // Convert images < 8kb to base64 strings
+						name: 'images/[hash]-[name].[ext]'
+					} 
+				}]
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				use: {
+					loader: "file-loader",
+					options: {
+						name: "fonts/[name].[ext]",
+					},
+				},
+			},
 		]
 	},
 	resolve: { extensions: ['*', '.js', '.jsx'] },
 	output : {
-		path: path.resolve(__dirname, "public/"),
-		publicPath: "src/assets/",
+		path: path.resolve(__dirname, "dist"),
+		//publicPath: "/dist/",
 		filename: "bundle.js"
 	},
 	devServer: {
-		contentBase: path.join(__dirname, "public/"),
-		port: 8080,
-		proxy: {
-			"*": {
-				target: "http://[::1]:3000",
-				changeOrigin: true,
-				secure: false
-			}
-		},
-		publicPath: "http://localhost:8080/public/",
+		contentBase: path.join(__dirname, "dist/"),
+		port: 3000,
+		// proxy: {
+		// 	// "*": {
+		// 	// 	target: "http://[::1]:8080",
+		// 	// 	changeOrigin: true,
+		// 	// 	secure: false
+		// 	// }
+		// },
+		publicPath: "http://localhost:3000/dist/",
 		hot: true
 	},
 	plugins: [ 
-		new webpack.HotModuleReplacementPlugin() 
+		new webpack.HotModuleReplacementPlugin()
 	]
 };
