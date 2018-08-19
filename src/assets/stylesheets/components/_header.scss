@@ -41,7 +41,12 @@
             position: fixed;
             right: 30px;
             top: 30px;
+            color: #FFFFFF;
         }
+        &:hover:before {
+            color: rgba(249,147,224,1)
+        }
+        
     }
     &.visible {
         width: 100%;
