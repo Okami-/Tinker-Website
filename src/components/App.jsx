@@ -6,7 +6,6 @@ import Services from "./Services/Services.jsx";
 import Contact from "./Contact/Contact.jsx";
 import ContactForm from "./Contact/ContactForm.jsx";
 
-import style from "../assets/stylesheets/main.scss";
 
 
 class App extends Component{

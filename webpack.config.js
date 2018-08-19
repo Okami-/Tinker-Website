@@ -4,6 +4,9 @@ module.exports = {
 	devtool: "source-map",
 	entry: "./src/index.jsx",
 	mode: "development",
+	node: {
+		fs: 'empty'
+	},  
 	module: {
 		rules: [
 			{
@@ -14,9 +17,10 @@ module.exports = {
 					presets: ['env', 'react', 'stage-0']
 				}
 			},
+			{ test: /(\.css$)/, loaders: ['style-loader', 'css-loader'] },
 			{
 				test: /\.scss$/,
-				//include: path.appSrc,
+				include: path.appSrc,
 				use: [
 					{
 						loader: "style-loader"
@@ -53,7 +57,7 @@ module.exports = {
 	resolve: { extensions: ['*', '.js', '.jsx'] },
 	output : {
 		path: path.resolve(__dirname, "dist"),
-		//publicPath: "/dist/",
+		publicPath: "/dist/",
 		filename: "bundle.js"
 	},
 	devServer: {

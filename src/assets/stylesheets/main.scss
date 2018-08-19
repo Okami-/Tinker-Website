@@ -20,7 +20,8 @@
 @import "layouts/layout";
 // COMPONENTS
 
-
+@import "vendor/bootstrap-grids";
 @import "components/header";
 @import "components/banner";
 @import "components/services";
+@import "components/contact-form";

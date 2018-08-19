@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import ScrollableAnchor from 'react-scrollable-anchor/lib/ScrollableAnchor';
 
 class Contact extends Component {
     render() {
         return (
             <div className="contact">
-                <h2>CONTACT</h2>
+                <ScrollableAnchor id={'section3'}>
+                    <h2>CONTACT</h2>
+                </ScrollableAnchor>
             </div>
         )
     }

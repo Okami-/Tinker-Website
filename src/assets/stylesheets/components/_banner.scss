@@ -1,5 +1,5 @@
 .banner {
-    margin-top: 100px;
+    margin-top: 200px;
     margin-bottom: 150px;
     @include clearfix;
     h1 {
@@ -9,25 +9,48 @@
         letter-spacing: 4px;
         line-height: 90px;
         float: left;
+        @media (max-width: $tablet) {
+            float: none;
+            width: 100%;
+        }
     }
     p {
-        width: 800px;
+        width: 600px;
         margin-top: 60px;
         float: left;
-        font-size: 24px;
+        font-size: 28px;
         font-weight: 300;
+        line-height: 40px;
+        width: 100%;
+        padding-right: 50%;
+        @media (max-width: $desktop) {
+            width: 100%;
+            padding: 0;
+        }
+        @media (max-width: $tablet) {
+            float: none;
+            width: 100%;
+        }
     }
     .banner-picture {
         float: right;
+        margin-right: 50px;
+        @media (max-width: $tablet) {
+            display: none;
+        }
     }
     .big-gear {
         width: 300px;
         height: 300px;
         background-image: url('../images/bigGear.svg');
         float: right;
-        -webkit-animation:spin 4s linear infinite;
-        -moz-animation:spin 4s linear infinite;
-        animation:spin 4s linear infinite;
+        -webkit-animation:ccspin 6s linear infinite;
+        -moz-animation:ccspin 6s linear infinite;
+        animation:ccspin 6s linear infinite;
+        @keyframes ccspin {
+            from {transform:rotate(360deg);}
+            to {transform:rotate(0deg);}
+        }
     }
     .small-gear {
         width: 150px;
@@ -37,8 +60,12 @@
         -webkit-animation:spin 4s linear infinite;
         -moz-animation:spin 4s linear infinite;
         animation:spin 4s linear infinite;
+        @keyframes spin {
+            from {transform:rotate(-360deg);}
+            to {transform:rotate(0deg);}
+        }
     }
-    @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-    @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-    @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+    // @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+    // @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+    // @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 }

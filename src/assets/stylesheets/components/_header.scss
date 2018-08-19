@@ -7,15 +7,63 @@
     }
 }
 .header {
-    margin-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     @include clearfix;
-    border-bottom: 2px solid #FFF;
+    //border-bottom: 2px solid #FFF;
+    position:fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: $background;
+    z-index: 500;
+    max-height: 100%;
+    .header-container {
+        padding-left: 30px;
+        padding-right: 30px;
+        max-width: 1440px;
+        position: relative;
+        @include clearfix;
+        margin: 0 auto;
+    }
 }
 .nav-menu {
     padding-top: 20px;
     float: right;
+    @media (max-width: $tablet) {
+        padding-top: 0;
+        &:before {
+            content: "\2261";
+            font-size: 50px;
+            display: block;
+            position: fixed;
+            right: 30px;
+            top: 30px;
+        }
+    }
+    &.visible {
+        width: 100%;
+        li {
+            &:first-child {
+                margin-top: 30px;
+            }
+            margin-bottom: 30px;
+            display: block;
+            font-size: 20px;
+            @include clearfix;
+            width: 100%;
+            float: none;
+            text-align: center;
+        }
+    }
     li {
+        @media (max-width: $tablet) {
+            display: none;
+            width: 100%;
+            float: none;
+        } 
         float: left;
         margin-right: 30px;
         font-size: 20px;
@@ -28,12 +76,14 @@
         }
     }
     li:last-child {
+        margin-right: 0;
         a {
             padding: 12px 12px 12px 12px;
             border-radius: 5px;
             background: $button-gradient;
             &:hover {
                 border-bottom: none;
+                background: $button-gradient-reverse;
             }
         }
     }
