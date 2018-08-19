@@ -9,6 +9,9 @@
 #contact-form {
     width: 500px;
     margin: 0 auto;
+    @media (max-width: $tablet) {
+        width: auto;
+    }
 }
 
 
