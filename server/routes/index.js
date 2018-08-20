@@ -1,17 +1,45 @@
 var express = require('express');
 var router = express.Router();
 var nodemailer = require('nodemailer');
+let { google } = require('googleapis');
+let OAuth2 = google.auth.OAuth2;
 const creds = require('../config/config');
 
+const EMAIL = "richiebkr@gmail.com"
+
+let oauth2Client = new OAuth2(
+    // ClientID
+    creds.CLIENTID,
+    // Client Secret
+    creds.CLIENTSECRET,
+    //Redirect URL
+    "https://developers.google.com/oauthplayground",
+);
+
+oauth2Client.setCredentials({
+    refresh_token: creds.REFRESHTOKEN
+});
+
+let accessToken = "";
+
+oauth2Client.refreshAccessToken(function(err, tokens) {
+    accessToken = tokens.access_token;
+})
 
 
 var transport = {
     host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
-        user: creds.USER,
-        pass: creds.PASS
+        type: "OAuth2",
+        user: 'richiebkr@gmail.com',
+        clientId: creds.CLIENTID,
+        clientSecret: creds.CLIENTSECRET,
+        refreshToken: creds.REFRESHTOKEN,
+        accessToken: accessToken
     }
-}
+};
 
 var transporter = nodemailer.createTransport(transport)
 

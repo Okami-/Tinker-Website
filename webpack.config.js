@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	devtool: "source-map",
 	entry: "./src/index.jsx",
@@ -52,17 +53,21 @@ module.exports = {
 					},
 				},
 			},
+			{
+				test: /\.html$/,
+				use: 'html-loader?attrs[]=video:src'
+			}
 		]
 	},
 	resolve: { extensions: ['*', '.js', '.jsx'] },
 	output : {
 		path: path.resolve(__dirname, "dist"),
-		publicPath: "/dist/",
+		publicPath: "/",
 		filename: "bundle.js"
 	},
 	devServer: {
-		contentBase: path.join(__dirname, "dist/"),
-		port: 3000,
+		contentBase: path.join(__dirname, "dist"),
+		port: 8080,
 		// proxy: {
 		// 	// "*": {
 		// 	// 	target: "http://[::1]:8080",
@@ -74,6 +79,12 @@ module.exports = {
 		hot: true
 	},
 	plugins: [ 
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new HtmlWebpackPlugin({
+			title:"Tinker",
+			template:__dirname+'/public/index.html',
+			inject: 'body',
+			filename: 'index.html'
+		})
 	]
 };

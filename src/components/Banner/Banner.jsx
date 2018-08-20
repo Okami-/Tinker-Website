@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-import bigGear from '../../assets/images/bigGear.svg';
+
 import ScrollableAnchor from 'react-scrollable-anchor'
+
 class Banner extends Component {
     render() {
         return (
             <div className="banner">
+                {/* <div className="video-test">
+                    <video id="tess-video" loop autoPlay>
+                        <source src="video/liftoff-tess.mp4" type="video/mp4" />
+                    </video>
+                </div> */}
                 <ScrollableAnchor id={'section1'}>
                     <h1>MOCK UP TO SETUP</h1>
                 </ScrollableAnchor>
