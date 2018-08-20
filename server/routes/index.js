@@ -3,21 +3,21 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 let { google } = require('googleapis');
 let OAuth2 = google.auth.OAuth2;
-const creds = require('../config/config');
+require('dotenv').load();
 
 const EMAIL = "richiebkr@gmail.com"
 
 let oauth2Client = new OAuth2(
     // ClientID
-    creds.CLIENTID,
+    process.env.CLIENTID,
     // Client Secret
-    creds.CLIENTSECRET,
+    process.env.CLIENTSECRET,
     //Redirect URL
     "https://developers.google.com/oauthplayground",
 );
 
 oauth2Client.setCredentials({
-    refresh_token: creds.REFRESHTOKEN
+    refresh_token: process.env.REFRESHTOKEN
 });
 
 let accessToken = "";
@@ -34,9 +34,9 @@ var transport = {
     auth: {
         type: "OAuth2",
         user: 'richiebkr@gmail.com',
-        clientId: creds.CLIENTID,
-        clientSecret: creds.CLIENTSECRET,
-        refreshToken: creds.REFRESHTOKEN,
+        clientId: process.env.CLIENTID,
+        clientSecret: process.env.CLIENTSECRET,
+        refreshToken: process.env.REFRESHTOKEN,
         accessToken: accessToken
     }
 };
