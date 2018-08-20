@@ -1,11 +1,11 @@
 var express = require("express");
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3030;
 var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var index = require('./routes/index');
 var http = require('http')
-require('dotenv').load();
+
 
 var app = express();
 
