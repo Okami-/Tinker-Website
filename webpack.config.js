@@ -1,6 +1,9 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
 	devtool: "source-map",
 	entry: "./src/index.jsx",
@@ -18,22 +21,37 @@ module.exports = {
 					presets: ['env', 'react', 'stage-0']
 				}
 			},
-			{ test: /(\.css$)/, loaders: ['style-loader', 'css-loader'] },
+			// { 
+			// 	test: /(\.css$)/, 
+			// 	loaders: [
+			// 		'style-loader', 
+			// 		'css-loader'
+			// 	] 
+			// },
+			// {
+			// 	test: /\.scss$/,
+			// 	include: path.appSrc,
+			// 	use: [
+			// 		{
+			// 			loader: "style-loader"
+			// 		},
+			// 		{
+			// 			loader: "css-loader"
+			// 		},
+			// 		{
+			// 			loader: "sass-loader"
+			// 		}
+			// 	]
+			// },
 			{
-				test: /\.scss$/,
+				test: /\.s?[ac]ss$/,
 				include: path.appSrc,
-				use: [
-					{
-						loader: "style-loader"
-					},
-					{
-						loader: "css-loader"
-					},
-					{
-						loader: "sass-loader"
-					}
-				]
-			},
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: 'css-loader', options: { url: true, sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } }
+                ],
+            },
 			{
 				test: /\.(png|jp(e*)g|svg)$/,  
 				use: [{
@@ -52,10 +70,6 @@ module.exports = {
 						name: "fonts/[name].[ext]",
 					},
 				},
-			},
-			{
-				test: /\.html$/,
-				use: 'html-loader?attrs[]=video:src'
 			}
 		]
 	},
@@ -66,17 +80,11 @@ module.exports = {
 		filename: "bundle.js"
 	},
 	devServer: {
-		contentBase: path.join(__dirname, "dist"),
+		contentBase: path.join(__dirname, "public"),
 		port: 8080,
-		// proxy: {
-		// 	// "*": {
-		// 	// 	target: "http://[::1]:8080",
-		// 	// 	changeOrigin: true,
-		// 	// 	secure: false
-		// 	// }
-		// },
-		publicPath: "http://localhost:3000/dist/",
-		hot: true
+		publicPath: "/",
+		hot: true,
+		open: true
 	},
 	plugins: [ 
 		new webpack.HotModuleReplacementPlugin(),
@@ -85,6 +93,10 @@ module.exports = {
 			template:__dirname+'/public/index.html',
 			inject: 'body',
 			filename: 'index.html'
-		})
+		}),
+		new MiniCssExtractPlugin({
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+      		chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+        })
 	]
 };

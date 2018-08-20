@@ -13,12 +13,12 @@ class Services extends Component {
                 <Service
                     className="icon pe-7s-browser pe-4x"
                     serviceTitle="WEB DESIGN"
-                    serviceDescription="Fluid, mobile first, and elegant designs from wireframe to finished product. We make your ideas <B>alive</B>."
+                    serviceDescription="Fluid, mobile first, and elegant designs from wireframe to finished product. We make your ideas alive."
                 />
                 <Service
                     className="icon pe-7s-science pe-4x"
                     serviceTitle="WEB DEVELOPMENT"
-                    serviceDescription="Our developers are kind of a big thing. Fast load times, elegant code, knowledgable staff, your product is and will always be the <b>smartest</b> kid in town."
+                    serviceDescription="Our developers are kind of a big thing. Fast load times, elegant code, knowledgable staff, your product is and will always be the smartest kid in town."
                 />
                 </div>
                 <div className="row">
