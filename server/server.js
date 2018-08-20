@@ -29,12 +29,5 @@ app.use('/', index);
 
 
 
-app.set('port', port);
-
-
-var server = http.createServer(app);
-
-
-server.listen(port);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
