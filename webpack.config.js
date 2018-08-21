@@ -3,6 +3,8 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 module.exports = {
 	devtool: "source-map",
@@ -97,6 +99,22 @@ module.exports = {
 		new MiniCssExtractPlugin({
             filename: devMode ? '[name].css' : '[name].[hash].css',
       		chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
-        })
+		}),
+		new ManifestPlugin({
+			fileName: 'asset-manifest.json'
+		}),
+		new SWPrecacheWebpackPlugin({
+			dontCacheBustUrlsMatching: /\.\w{8}\./,
+			filename: 'service-worker.js',
+			logger(message) {
+				if (message.indexOf('Total precache size is') === 0) {
+					return;
+				}
+				console.log(message);
+			},
+			minify: true,
+			navigateFallback: '/index.html',
+			staticFileGlobsIgnorePatters: [/\.map$/, /asset-manifest\.json$/],
+		})
 	]
 };
