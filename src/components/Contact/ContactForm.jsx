@@ -42,7 +42,7 @@ class ContactForm extends Component {
                 </div>
                 <div className="form-group">
                     <label for="exampleInputEmail">Email Address</label>
-                    <input type="email" className="form-control" id="email" name="email" aria-describedby="emailHelp"/>
+                    <input type="email" className="form-control" id="email" name="email" aria-describedby="email" aria-label="email-message"/>
                 </div>
                 <div className="form-group">
                     <label for="message">Message</label>
