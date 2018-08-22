@@ -30,7 +30,7 @@ class Services extends Component {
                 <Service
                     className="icon pe-7s-smile pe-4x"
                     serviceTitle="SUPPORT"
-                    serviceDescription="Testing, maitanance, aka all the work no one wants to do. Well our team enjoys that stuff and we're pretty good at it it. Did I mention we want to see you smile and be happy. We're pretty good at that too."
+                    serviceDescription="Testing, maitanance, aka all the work no one wants to do. Well our team enjoys that stuff and we're pretty good at it. Did I mention we want to see you smile and be happy. We're pretty good at that too."
                 />
                 </div>
             </div>
