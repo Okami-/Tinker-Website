@@ -10,7 +10,6 @@
     padding-top: 30px;
     padding-bottom: 30px;
     @include clearfix;
-    //border-bottom: 2px solid #FFF;
     position:fixed;
     overflow: hidden;
     top: 0;
@@ -29,13 +28,12 @@
         margin: 0 auto;   
     }
 }
-.nav-menu {
-    padding-top: 20px;
-    float: right;
-    @media (max-width: $tablet) {
-        padding-top: 0;
-        &:before {
+.hamburger {
+    &:before {
+        @media (max-width: $tablet) {
             content: "\2261";
+            padding: 0;
+            margin: 0;
             font-size: 50px;
             display: block;
             position: fixed;
@@ -43,26 +41,34 @@
             top: 30px;
             color: #FFFFFF;
         }
-        &:hover:before {
-            color: rgba(249,147,224,1)
-        }
-        
     }
-    &.visible {
-        width: 100%;
-        li {
-            &:first-child {
-                margin-top: 30px;
-            }
-            margin-bottom: 30px;
-            display: block;
-            font-size: 20px;
-            @include clearfix;
+    &:hover:before {
+        color: rgba(249,147,224,1)
+    }
+    border:none;
+    padding: 0;
+}
+.nav-menu {
+    padding-top: 20px;
+    float: right;
+    @media (max-width: $tablet) {
+        &.visible {
             width: 100%;
-            float: none;
-            text-align: center;
+            li {
+                &:first-child {
+                    margin-top: 30px;
+                }
+                margin-bottom: 30px;
+                display: block;
+                font-size: 20px;
+                @include clearfix;
+                width: 100%;
+                float: none;
+                text-align: center;
+            }
         }
     }
+    
     li {
         @media (max-width: $tablet) {
             display: none;

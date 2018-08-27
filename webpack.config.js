@@ -23,37 +23,37 @@ module.exports = {
 					presets: ['env', 'react', 'stage-0']
 				}
 			},
-			// { 
-			// 	test: /(\.css$)/, 
-			// 	loaders: [
-			// 		'style-loader', 
-			// 		'css-loader'
-			// 	] 
-			// },
-			// {
-			// 	test: /\.scss$/,
-			// 	include: path.appSrc,
-			// 	use: [
-			// 		{
-			// 			loader: "style-loader"
-			// 		},
-			// 		{
-			// 			loader: "css-loader"
-			// 		},
-			// 		{
-			// 			loader: "sass-loader"
-			// 		}
-			// 	]
-			// },
+			{ 
+				test: /(\.css$)/, 
+				loaders: [
+					'style-loader', 
+					'css-loader'
+				] 
+			},
 			{
-				test: /\.s?[ac]ss$/,
+				test: /\.scss$/,
 				include: path.appSrc,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: { url: true, sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true } }
-                ],
-            },
+				use: [
+					{
+						loader: "style-loader"
+					},
+					{
+						loader: "css-loader"
+					},
+					{
+						loader: "sass-loader"
+					}
+				]
+			},
+			// {
+			// 	test: /\.s?[ac]ss$/,
+			// 	include: path.appSrc,
+            //     use: [
+            //         MiniCssExtractPlugin.loader,
+            //         { loader: 'css-loader', options: { url: true, sourceMap: true } },
+            //         { loader: 'sass-loader', options: { sourceMap: true } }
+            //     ],
+            // },
 			{
 				test: /\.(png|jp(e*)g|svg)$/,  
 				use: [{
