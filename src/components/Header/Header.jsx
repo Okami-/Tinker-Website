@@ -1,18 +1,11 @@
 import React, { Component } from "react";
-import ScrollableAnchor from 'react-scrollable-anchor';
 import { configureAnchors } from 'react-scrollable-anchor';
 configureAnchors({offset: -230, scrollDuration: 800});
 
-import Login from "../Admin/Login.jsx";
-
 import {
 	BrowserRouter as Router,
-	Route,
 	Link,
-	Switch,
-	Redirect
   } from 'react-router-dom'
-
 
 class Header extends Component {
 
@@ -33,7 +26,6 @@ class Header extends Component {
         })
     }
     
-
     render() {
         return (
             <header className="header">
@@ -56,6 +48,5 @@ class Header extends Component {
         )
     }
 };
-
 
 export default Header;

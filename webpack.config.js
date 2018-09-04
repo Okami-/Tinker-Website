@@ -51,15 +51,6 @@ module.exports = {
 					}
 				]
 			},
-			// {
-			// 	test: /\.s?[ac]ss$/,
-			// 	include: path.appSrc,
-            //     use: [
-            //         MiniCssExtractPlugin.loader,
-            //         { loader: 'css-loader', options: { url: true, sourceMap: true } },
-            //         { loader: 'sass-loader', options: { sourceMap: true } }
-            //     ],
-            // },
 			{
 				test: /\.(png|jp(e*)g|svg)$/,  
 				use: [{
