@@ -2,6 +2,5 @@ node_modules
 /dist/
 package-lock.json
 resources
-server/config
 .env
 dump.rdb
