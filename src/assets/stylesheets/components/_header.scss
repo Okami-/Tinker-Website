@@ -4,6 +4,9 @@
         font-size: 55px;
         font-weight: 300;
         letter-spacing: 4px;
+        @media (max-width: $tablet) {
+            font-size: 35px;
+        }
     }
 }
 .header {
@@ -19,6 +22,9 @@
     background-color: $background;
     z-index: 500;
     max-height: 100%;
+    @media (max-width: $tablet) {
+        padding: 14px 0;
+    }
     .header-container {
         padding-left: 30px;
         padding-right: 30px;
@@ -38,7 +44,7 @@
             display: block;
             position: fixed;
             right: 30px;
-            top: 30px;
+            top: 3px;
             color: #FFFFFF;
         }
     }
@@ -52,11 +58,15 @@
     padding-top: 20px;
     float: right;
     @media (max-width: $tablet) {
+        padding-top: 0px;
         &.visible {
             width: 100%;
             li {
                 &:first-child {
                     margin-top: 30px;
+                    @media (max-width: $tablet) {
+                        margin-top: 20px;
+                    }
                 }
                 margin-bottom: 30px;
                 display: block;
@@ -65,6 +75,9 @@
                 width: 100%;
                 float: none;
                 text-align: center;
+                @media (max-width: $tablet) {
+                    margin-bottom: 20px;
+                }
             }
         }
     }
@@ -92,6 +105,9 @@
             padding: 12px 12px 12px 12px;
             border-radius: 5px;
             background: $button-gradient;
+            @media (max-width: $tablet) {
+                padding: 6px 6px;
+            }
             &:hover {
                 border-bottom: none;
                 background: $button-gradient-reverse;

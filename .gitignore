@@ -4,3 +4,4 @@ package-lock.json
 resources
 server/config
 .env
+dumb.rdb

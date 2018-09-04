@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ScrollableAnchor from 'react-scrollable-anchor/lib/ScrollableAnchor';
-
+import ScrollableAnchor from 'react-scrollable-anchor';
 
 class Services extends Component {
     render() {

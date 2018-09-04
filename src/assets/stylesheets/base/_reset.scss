@@ -38,3 +38,18 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   table {
     border-collapse: collapse;
     border-spacing: 0; }
+
+// Auto Complete fixes in chrome
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: white !important;
+}
+
+.form-container {
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+}

@@ -17,6 +17,9 @@
         margin: 0 auto;
         margin-bottom: 100px;
         font-weight: 900;
+        @media (max-width: 767px) {
+            margin-bottom: 50px;
+        }
     }
     .service-title {
         text-align: center;

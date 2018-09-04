@@ -38,10 +38,16 @@ module.exports = {
 						loader: "style-loader"
 					},
 					{
-						loader: "css-loader"
+						loader: "css-loader",
+						options: {
+							sourceMap: true
+						}
 					},
 					{
-						loader: "sass-loader"
+						loader: "sass-loader",
+						options: {
+							sourceMap: true
+						}
 					}
 				]
 			},
@@ -86,8 +92,17 @@ module.exports = {
 		port: 8080,
 		publicPath: "/",
 		hot: true,
-		open: true
+		open: true,
+		historyApiFallback: true,
+		// proxy: [ // allows redirect of requests to webpack-dev-server to another destination
+		// 	{
+		// 	  context: ['/api', '/auth'],  // can have multiple
+		// 	  target: 'http://[::1]:8085', //server and port to redirect to
+		// 	  secure: false //don't use https
+		// 	}
+		// ],
 	},
+	
 	plugins: [ 
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({

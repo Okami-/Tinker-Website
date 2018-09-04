@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ScrollableAnchor from 'react-scrollable-anchor/lib/ScrollableAnchor';
-
+import ScrollableAnchor from 'react-scrollable-anchor';
 class Contact extends Component {
     render() {
         return (

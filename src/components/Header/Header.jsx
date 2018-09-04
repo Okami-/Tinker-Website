@@ -3,16 +3,20 @@ import ScrollableAnchor from 'react-scrollable-anchor';
 import { configureAnchors } from 'react-scrollable-anchor';
 configureAnchors({offset: -230, scrollDuration: 800});
 
+import Login from "../Admin/Login.jsx";
+
+import {
+	BrowserRouter as Router,
+	Route,
+	Link,
+	Switch,
+	Redirect
+  } from 'react-router-dom'
+
+
 class Header extends Component {
-    
-    // handleClick(e) {
-    //     document.querySelector('.nav-menu').addEventListener('click', e => {
-    //         e.target.classList.toggle('visible');
-    //     });
-    //     console.log('hi')
-    // };
-    // (e) => this.handleClick(e)
-    
+
+    // Mobile Menu Logic
     constructor(props) {
         super(props);
         this.toggleClass = this.toggleClass.bind(this);
@@ -21,6 +25,7 @@ class Header extends Component {
         };       
     }
 
+    // Mobile Menu Logic
     toggleClass(event) {
         const currentState = this.state.showMenu;
         this.setState({
@@ -35,10 +40,15 @@ class Header extends Component {
                 <div className="header-container">
                     <div className="logo"><h1>Tinker</h1></div>
                     <button className="hamburger" onClick={this.toggleClass}></button>
-                    <ul className={`${this.state.showMenu ? 'visible ' : ''}nav-menu`}>
+                    <ul className={`${this.state.showMenu ? 'visible ' : ''}nav-menu`}>              
                         <li><a href="#section1">ABOUT</a></li>
                         <li><a href="#section2">SERVICES</a></li>
                         {/* <li><a href="#">WORK</a></li> */}
+             
+                        <li>
+                            <Link to="/login">LOGIN</Link>
+                        </li>
+
                         <li><a href="#section3">CONTACT</a></li>
                     </ul>
                 </div>

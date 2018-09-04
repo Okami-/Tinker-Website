@@ -5,7 +5,8 @@
     margin-bottom: 100px;
     font-weight: 900;
     @media (max-width: $tablet) {
-        
+        margin-top: 100px;
+        margin-bottom: 50px;
     }
 }
 
@@ -24,30 +25,31 @@
         cursor: pointer;
         margin-bottom: 130px;
     }
+    input[type=text], select, textarea {
+        width: 100%; 
+        padding: 12px; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        box-sizing: border-box; 
+        margin-top: 6px; 
+        margin-bottom: 36px; 
+        resize: vertical 
+    }
+    input[type=email], select, textarea {
+        width: 100%; 
+        padding: 12px; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        box-sizing: border-box; 
+        margin-top: 6px; 
+        margin-bottom: 36px; 
+        resize: vertical;
+    }
+    
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
 }
 
-input[type=text], select, textarea {
-    width: 100%; 
-    padding: 12px; 
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    margin-top: 6px; 
-    margin-bottom: 36px; 
-    resize: vertical 
-}
 
-input[type=email], select, textarea {
-    width: 100%; 
-    padding: 12px; 
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    margin-top: 6px; 
-    margin-bottom: 36px; 
-    resize: vertical;
-}
 
-input[type=submit]:hover {
-    background-color: #45a049;
-}

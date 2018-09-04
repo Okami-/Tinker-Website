@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-import ScrollableAnchor from 'react-scrollable-anchor'
+import ScrollableAnchor from 'react-scrollable-anchor';
 
 class Banner extends Component {
     render() {
@@ -13,8 +12,7 @@ class Banner extends Component {
                     <div className="big-gear"></div>
                     <div className="small-gear"></div>
                 </div>
-                <p>We are a UI and full-stack development consulting team based in the bay area and southern california.</p>
-                
+                <p>We are a UI and full-stack development consulting team based in the bay area and southern california.</p>           
             </div>
         );
     }
