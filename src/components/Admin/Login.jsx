@@ -7,10 +7,6 @@ class Login extends Component {
         super(props);
         this.state = {data: ''}
     }    
-
-    // componentWillUnmount() {
-    //     this.state = {data: ''}
-    // }
     
     handleLogin(e){
         e.preventDefault();
@@ -24,11 +20,17 @@ class Login extends Component {
                 password: password
             }
         }).then((res)=>{
+            // This is the response if the user does not match the user in db from the passport response
             if(res.data.message === 'No user found.'){
                 this.setState({data: res.data.message});
+            // This is the response if the password does not match the password in db from the passport response    
             } else if(res.data.message === 'Oops! Wrong password.'){
                 this.setState({data: res.data.message});
-            } 
+            // If the user and pass match clear the state with an empty string 
+            } else {
+                this.setState({data: ''});
+                this.props.history.push('/profile')
+            }
         })
     }
 

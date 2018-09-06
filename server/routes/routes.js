@@ -29,37 +29,23 @@ router.post('/api/send', (req, res, next) => {
     })
 })
 
-
-
-
-//process the login form
-router.post('/api/login', (req, res, next) => passport.authenticate('local-login', {
-    successRedirect : '/api/profile/', 
-    failureRedirect : '/',
-    failWithError: true
-},
+router.post('/api/login', (req, res, next) => passport.authenticate('local-login', 
     function(err, user, info){
         if (err) { return next(err) }
-        if (!user) { return res.json( { message: info.message }) }
-        res.json(user);
+        if (!user) { return res.json( { message: info.message })}
+        //res.json(user);
+        if(user)
+        req.login(user, function(err){
+          if(err) return next(err);
+          return res.json({'success': true}); 
+        });
     }
 )(req, res, next));
 
-
-// router.get('/api/login', (req, res, next) => {
-//     res.json({name: 'login again'});
-// })
-
-// router.get('/api/profile', (req, res, next) => {
-//     console.log('help');
-// })
-
 function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated())
         return next();
-
     // if they aren't redirect them to the home page
     res.redirect('/');
 }

@@ -11,7 +11,6 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const routes = require('./routes/routes');
-const flash = require('connect-flash');
 var redis = require('redis');
 
 // DB connection ======================================================================
@@ -31,12 +30,11 @@ app.use(express.static(path.join(__dirname, '../dist')));
 app.use(session({
   store: new RedisStore({ host: 'localhost', port: 6379, client: client,ttl :  260}),
   secret: 'ilovescotchscotchyscotchscotch', // session secret
-  resave: false,
+  resave: true,
   saveUninitialized: true
 })); 
 app.use(passport.initialize());
 app.use(passport.session()); 
-app.use(flash());
 
 // routes ======================================================================
 app.use('/', routes);
