@@ -5,9 +5,9 @@ import Banner from "./Banner/Banner.jsx";
 import Services from "./Services/Services.jsx";
 import Contact from "./Contact/Contact.jsx";
 import ContactForm from "./Contact/ContactForm.jsx";
-import LoginRoutes from "../routes/Routes.jsx";
-
-
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Login from "../components/Admin/Login.jsx";
+import Profile from "../components/Profile/Profile.jsx";
 class App extends Component{
 	constructor() {
 		super();
@@ -19,7 +19,7 @@ class App extends Component{
 	render(){
 		return(
 			<div className="App">
-				<LoginRoutes/>
+				<Route path="/login" component={Login} />
 				<Header/>
 				<Banner/>
 				<Services/>

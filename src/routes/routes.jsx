@@ -11,12 +11,4 @@ class LoginRoutes extends Component {
     }
 }
 
-class ProfileRoutes extends Component {
-    render() {
-        return(   
-            <Route path="/profile" component={Profile} />
-        )
-    }
-}
-
 export default LoginRoutes;

@@ -8,14 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 // passport needs ability to serialize and unserialize users out of session
 
 // used to serialize the user for the session
-passport.serializeUser(function(username, done) {
-    done(null, username);
-});
 
-// used to deserialize the user
-passport.deserializeUser(function(username, done) {
-    done(null, username);
-});
 // =========================================================================
 // LOCAL LOGIN =============================================================
 // =========================================================================
@@ -34,12 +27,20 @@ function(req, username, password, done) { // callback with email and password fr
         if (err)
             return done(err);
         if(username !== user[0])
-            return done(null, false, req.flash('loginmessage', 'No user found.'));
+            return done(null, false, {message: 'No user found.'});
         if(password !== user[1])
-            return done(null, false, req.flash('loginmessage', 'Oops! Wrong password.'));
+            return done(null, false, {message: 'Oops! Wrong password.'});
         return done(null, user);
     });
 }));
 
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+// used to deserialize the user
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
 
 module.exports = passport;

@@ -85,13 +85,14 @@ module.exports = {
 		hot: true,
 		open: true,
 		historyApiFallback: true,
-		// proxy: [ // allows redirect of requests to webpack-dev-server to another destination
-		// 	{
-		// 	  context: ['/api', '/auth'],  // can have multiple
-		// 	  target: 'http://[::1]:8085', //server and port to redirect to
-		// 	  secure: false //don't use https
-		// 	}
-		// ],
+		proxy: [ // allows redirect of requests to webpack-dev-server to another destination
+			{
+			  context: ['/api', '/auth'],  // can have multiple
+			  target: 'http://localhost:8085', //server and port to redirect to
+			  changeOrigin: true,
+			  secure: false //don't use https
+			}
+		],
 	},
 	
 	plugins: [ 

@@ -10,7 +10,7 @@ let oauth2Client = new OAuth2(
     // Client Secret
     process.env.CLIENTSECRET,
     //Redirect URL
-    "https://developers.google.com/oauthplayground",
+    "https://developers.google.com/oauthplayground"
 );
 
 oauth2Client.setCredentials({
