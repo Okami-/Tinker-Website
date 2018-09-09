@@ -5,10 +5,12 @@ import Banner from "./Banner/Banner.jsx";
 import Services from "./Services/Services.jsx";
 import Contact from "./Contact/Contact.jsx";
 import ContactForm from "./Contact/ContactForm.jsx";
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Login from "../components/Admin/Login.jsx";
 import Profile from "../components/Profile/Profile.jsx";
 class App extends Component{
+
+	
 	constructor() {
 		super();
 		// Google analytics initialization 
@@ -19,12 +21,19 @@ class App extends Component{
 	render(){
 		return(
 			<div className="App">
-				<Route path="/login" component={Login} />
 				<Header/>
-				<Banner/>
-				<Services/>
-				<Contact/>
-				<ContactForm/>
+				<Switch>
+					<Route exact path='/' render={props =>
+						<div>
+							<Banner />
+							<Services />
+							<Contact />
+							<ContactForm />
+						</div>
+					} />		
+					<Route path="/profile" component={Profile}></Route>
+					<Route path="/login" component={Login} />
+				</Switch>
 			</div>
 		);  
 	}

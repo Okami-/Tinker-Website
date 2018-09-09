@@ -29,16 +29,17 @@ router.post('/api/send', (req, res, next) => {
     })
 })
 
-router.post('/api/login', (req, res, next) => passport.authenticate('local-login', 
-    function(err, user, info){
-        if (err) { return next(err) }
-        if (!user) { return res.json( { message: info.message })}
-        //res.json(user);
-        if(user)
-        req.login(user, function(err){
-          if(err) return next(err);
-          return res.json({'success': true}); 
-        });
+router.post('/api/login', (req, res, next) => passport.authenticate('local-login', (err, user, info) => {
+        if (!user) {
+            return res.status(401).send(err);
+        } else {
+            res.data = user;
+            req.login(user, function(err) {
+                if (err) { return next(err); }
+                return res.json(user)
+            });
+        }
+      
     }
 )(req, res, next));
 
@@ -49,5 +50,15 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
+
+router.get("/profile", isLoggedIn, (req, res) => {
+    var user = req.session.passport;
+})
+
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+
 
 module.exports = router;

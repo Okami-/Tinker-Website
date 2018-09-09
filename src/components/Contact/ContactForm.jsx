@@ -37,15 +37,15 @@ class ContactForm extends Component {
             <div>
             <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
                 <div className="form-group">
-                    <label for="name">Name</label>
+                    <label htmlFor="name">Name</label>
                     <input type="text" className="form-control" id="name" name="name"/>
                 </div>
                 <div className="form-group">
-                    <label for="exampleInputEmail">Email Address</label>
+                    <label htmlFor="exampleInputEmail">Email Address</label>
                     <input type="email" className="form-control" id="email" aria-describedby="email" name="email" aria-label="email-message"/>
                 </div>
                 <div className="form-group">
-                    <label for="message">Message</label>
+                    <label htmlFor="message">Message</label>
                     <textarea className="form-control" rows="5" id="message" name="message"></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>

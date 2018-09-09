@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { configureAnchors } from 'react-scrollable-anchor';
-configureAnchors({offset: -230, scrollDuration: 800});
+configureAnchors({offset: -230, scrollDuration: 500});
 
 import {
 	BrowserRouter as Router,
-	Link,
+    Link,
+    Route,
   } from 'react-router-dom'
 
 class Header extends Component {
@@ -14,7 +15,8 @@ class Header extends Component {
         super(props);
         this.toggleClass = this.toggleClass.bind(this);
         this.state = { 
-            showMenu: false 
+            showMenu: false,
+            isLoggedIn: false 
         };       
     }
 
@@ -33,15 +35,15 @@ class Header extends Component {
                     <div className="logo"><h1>Tinker</h1></div>
                     <button className="hamburger" onClick={this.toggleClass}></button>
                     <ul className={`${this.state.showMenu ? 'visible ' : ''}nav-menu`}>              
-                        <li><a href="#section1">ABOUT</a></li>
-                        <li><a href="#section2">SERVICES</a></li>
-                        {/* <li><a href="#">WORK</a></li> */}
-             
+                        <li><a href="/#section1">ABOUT</a></li>
+                        <li><a href="/#section2">SERVICES</a></li>   
                         <li>
-                            <Link to="/login">LOGIN</Link>
+                            <Link to="/login">{
+                                this.props.isLogggedIn ? 'LOGOUT' : 'LOGIN'
+                            }</Link>
                         </li>
-
-                        <li><a href="#section3">CONTACT</a></li>
+                        <li><a href="/#section3">CONTACT</a></li>
+                       
                     </ul>
                 </div>
             </header>
