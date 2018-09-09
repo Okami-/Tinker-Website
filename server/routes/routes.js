@@ -3,7 +3,6 @@ const router = express.Router();
 const transporter = require('../config/nodemailer');
 const passport = require('../config/passport');
 
-// process the transporter for email
 router.post('/api/send', (req, res, next) => {  
     var name = req.body.name
     var email = req.body.email
@@ -38,8 +37,7 @@ router.post('/api/login', (req, res, next) => passport.authenticate('local-login
                 if (err) { return next(err); }
                 return res.json(user)
             });
-        }
-      
+        }     
     }
 )(req, res, next));
 
