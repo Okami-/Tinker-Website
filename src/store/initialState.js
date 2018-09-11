@@ -1,5 +1,5 @@
-import access from "login/reducer.js"
+import access from './login/reducer'
 
 export default {
     access,
-}
+};

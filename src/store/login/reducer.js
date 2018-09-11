@@ -1,3 +1,4 @@
+import initialState from '../initialState'
 import * as ActionTypes from './types';
 
 export default function access(state = initialState, action) {
