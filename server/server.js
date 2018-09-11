@@ -43,9 +43,11 @@ app.use(express.static(path.join(__dirname, '../dist')));
 app.use(session({
   store: new RedisStore({ host: 'localhost', port: 6379, client: client, ttl :  260}),
   secret: 'ilovescotchscotchyscotchscotch', // session secret
-  resave: false,
-  saveUninitialized: false,
-  ttl: 120
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    expires: 20 * 1000
+  }
 })); 
 app.use(passport.initialize());
 app.use(passport.session()); 

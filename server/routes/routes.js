@@ -28,7 +28,7 @@ router.post('/api/send', (req, res, next) => {
     })
 })
 
-router.post('/api/login', (req, res, next) => passport.authenticate('local-login', (err, user, info) => {
+router.post('/api/login', (req, res, next) => passport.authenticate('local-login', (err, user) => {
         if (!user) {
             return res.status(401).send(err);
         } else {
@@ -41,6 +41,22 @@ router.post('/api/login', (req, res, next) => passport.authenticate('local-login
     }
 )(req, res, next));
 
+router.get("/profile", isLoggedIn, (req, res) => {
+    if(!req.session.user) {
+        return res.status(401).send();
+    }
+
+    return res.status(200).send('Welcome nugget');
+})
+
+router.get('/logout', function(req, res){
+    req.session.destroy((err) => {
+        if(err) return next(err)
+        req.logout();
+        res.redirect('/');
+    })
+});
+
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated())
@@ -48,15 +64,5 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
-
-router.get("/profile", isLoggedIn, (req, res) => {
-    var user = req.session.passport;
-})
-
-router.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
-});
-
 
 module.exports = router;

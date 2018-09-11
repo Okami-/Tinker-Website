@@ -87,9 +87,9 @@ module.exports = {
 		historyApiFallback: true,
 		proxy: [ // allows redirect of requests to webpack-dev-server to another destination
 			{
-			  context: ['/api', '/auth/'],  // can have multiple
-			  target: 'http://localhost:8085', //server and port to redirect to
-			  changeOrigin: true,
+			  context: ['/api', '/auth/', '/logout', '/profile'],  // can have multiple
+			  target: 'http://[::1]:8085', //server and port to redirect to
+			  changeOrigin: false,
 			  secure: false //don't use https
 			}
 		],

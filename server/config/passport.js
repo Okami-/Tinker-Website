@@ -31,8 +31,6 @@ passport.use('local-login', new LocalStrategy({
         let user = null;
         await getAsync('usersDatabase').then((users) => {
             const currUsers = JSON.parse(users);
-
-        // if redis session expired, create database with one user
             if (!currUsers || currUsers.length < 1) {
                 client.set('usersDatabase', [
                 {

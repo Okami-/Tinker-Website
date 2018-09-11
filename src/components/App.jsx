@@ -10,7 +10,6 @@ import Login from "../components/Admin/Login.jsx";
 import Profile from "../components/Profile/Profile.jsx";
 class App extends Component{
 
-	
 	constructor() {
 		super();
 		// Google analytics initialization 
