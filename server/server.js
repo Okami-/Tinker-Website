@@ -26,7 +26,7 @@ client.set('usersDatabase', JSON.stringify([
     password: '$2a$04$4yQfCo8kMpH24T2iQkw9p.hPjcz10m.FcWmgkOhkXNPSpbwHZ877S',
     userName: 'rbaker',
   }
-]),redis.print);
+]), redis.print);
 
 
 /// middleware ======================================================================
@@ -41,21 +41,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(session({
-  store: new RedisStore({ host: 'localhost', port: 6379, client: client, ttl :  260}),
+  store: new RedisStore({ host: 'localhost', port: 6379, client: client, ttl: 260 }),
   secret: 'ilovescotchscotchyscotchscotch', // session secret
   resave: true,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     expires: 20 * 1000
   }
-})); 
+}));
 app.use(passport.initialize());
-app.use(passport.session()); 
+app.use(passport.session());
 
 // routes ======================================================================
 app.use('/', routes);
-app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname+'/../dist/index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../dist/index.html'));
 });
 // launch ======================================================================
 app.listen(port, () => console.log(`Listening on port ${port}`));

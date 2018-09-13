@@ -23,7 +23,7 @@ export function login(email, password) {
                 isAuthenticated: true,
                 loggedUserobj: response.data,
             });
-            this.props.history.push('/profile');
+            // this.props.history.push('/profile');
             Cookies.set('authority__loggedUserObj', response.data, { expires: 1 });
         }).catch(error => {
             if (error.response) {
@@ -46,7 +46,7 @@ export function logout() {
     return dispatch => {
         axios({
             method: "GET",
-            url: "/logout",
+            url: "/api/logout",
             withCredentials: true,
         }).then(response => {
             Cookies.remove('authority__loggedUserObj');

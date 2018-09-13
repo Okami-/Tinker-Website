@@ -46,14 +46,10 @@ router.post('/api/login', (req, res, next) => passport.authenticate('local-login
 )(req, res, next));
 
 router.get("/profile", isLoggedIn, (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send();
-    }
-
     return res.status(200).send('Welcome nugget');
 })
 
-router.get('/logout', function (req, res) {
+router.get('/api/logout', function (req, res) {
     req.session.destroy((err) => {
         if (err) return next(err)
         req.logout();
