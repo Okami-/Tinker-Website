@@ -15,8 +15,6 @@ if (process.env.NODE_ENV === `development`) {
   middlewares.push(logger);
 }
 
-
-
 export function configureStore(initialState) {
   return createStore(
     rootReducer,
@@ -25,14 +23,8 @@ export function configureStore(initialState) {
       applyMiddleware(
         thunk,
         reduxImmutableStateInvariant(),
-        logger,
         ...middlewares,
       )
     )
   )
-  if (process.env.NODE_ENV !== 'production' && module.hot) {
-    module.hot.accept('./reducers', () =>
-      store.replaceReducer(rootReducer)
-    )
-  }
 }

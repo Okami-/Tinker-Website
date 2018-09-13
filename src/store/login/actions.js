@@ -13,3 +13,5 @@ export const logout = () => ({
 export const getProfile = () => ({
     type: ActionTypes.PROFILE_REQUESTED,
 });
+
+

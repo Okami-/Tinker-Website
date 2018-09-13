@@ -3,18 +3,18 @@ const router = express.Router();
 const transporter = require('../config/nodemailer');
 const passport = require('../config/passport');
 
-router.post('/api/send', (req, res, next) => {  
+router.post('/api/send', (req, res, next) => {
     var name = req.body.name
     var email = req.body.email
     var message = req.body.message
     var content = `name: ${name} \nemail: ${email} \nmessage: ${message} `;
     var mail = {
         from: name,
-        to: 'richiebkr@gmail.com', 
+        to: 'richiebkr@gmail.com',
         subject: 'New Message from Tinker Website',
         text: content
     }
-    
+
     transporter.sendMail(mail, (err, data) => {
         if (err) {
             res.json({
@@ -29,29 +29,33 @@ router.post('/api/send', (req, res, next) => {
 })
 
 router.post('/api/login', (req, res, next) => passport.authenticate('local-login', (err, user) => {
-        if (!user) {
-            return res.status(401).send(err);
-        } else {
-            res.data = user;
-            req.login(user, function(err) {
-                if (err) { return next(err); }
-                return res.json(user)
-            });
-        }     
+    if (!user) {
+        return res.status(401).send(err);
+    } else {
+        res.data = user;
+        req.login(user, function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                return res.json(user);
+            }
+        });
+
     }
+}
 )(req, res, next));
 
 router.get("/profile", isLoggedIn, (req, res) => {
-    if(!req.session.user) {
+    if (!req.session.user) {
         return res.status(401).send();
     }
 
     return res.status(200).send('Welcome nugget');
 })
 
-router.get('/logout', function(req, res){
+router.get('/logout', function (req, res) {
     req.session.destroy((err) => {
-        if(err) return next(err)
+        if (err) return next(err)
         req.logout();
         res.redirect('/');
     })

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { login } from '../../store/login'
 
 class Login extends Component {
     constructor(props) {
@@ -8,34 +10,31 @@ class Login extends Component {
         this.state = {
             data: '',
             email: '',
-            password: '',
-            errors: {},
-            isLoading: false
+            password: ''
         }
-        
         this.handleLogin = this.handleLogin.bind(this);
         this.onChange = this.onChange.bind(this);
-    }    
-    
-    handleLogin(e){
+    }
+
+    static defaultProps = {
+        error: null,
+        userObj: {},
+        loginUser: () => null,
+    }
+    state = {
+        error: null,
+    };
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.error) {
+            this.setState({ error: nextProps.error });
+        }
+    }
+
+    handleLogin(e) {
         e.preventDefault();
-        const email = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        axios({
-            method: "POST",
-            url: "/api/login",
-            data: {
-                email: email,
-                password: password
-            },
-            withCredentials: true,
-        }).then(response =>{
-            console.log(response.data);
-            this.setState({data: ''});
-            this.props.history.push('/profile');
-        }).catch(error => {
-            console.log(error.response.data.message)
-        })
+        let { email, password } = this.state;
+        this.props.login(email, password);
     }
 
     onChange(e) {
@@ -43,31 +42,33 @@ class Login extends Component {
     }
 
     render() {
-        const { errors, email, password, isLoading } = this.state;
-        return(
-            <Route render={({history}) => (
+        const { error, email, password, isLoading } = this.state;
+        const errorMessage = error ? error.message : '';
+
+        return (
+            <Route render={({ history }) => (
                 <div className="login-wrapper">
                     <div className="login-container"></div>
                     <div className="form-container">
                         <form className="login-form" onSubmit={this.handleLogin}>
-                            <button className="exit-login-button" type='button' onClick={() => { history.push('/') }}></button> 
-                            <div class="pe-7s-door-lock pe-5x login-symbol"></div>                 
+                            <button className="exit-login-button" type='button' onClick={() => { history.push('/') }}></button>
+                            <div class="pe-7s-door-lock pe-5x login-symbol"></div>
                             <h2>LOG IN</h2>
-                            <span className="error-flash">{this.state.data.message}</span>
-                            <input 
-                                type="email" 
-                                id="username" 
-                                name="email" 
-                                className="login-username" 
+                            <span className="error-flash">{errorMessage}</span>
+                            <input
+                                type="email"
+                                id="username"
+                                name="email"
+                                className="login-username"
                                 placeholder="Email"
                                 value={email}
                                 onChange={this.onChange}
                             />
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                className="login-password" 
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                className="login-password"
                                 placeholder="Password"
                                 value={password}
                                 onChange={this.onChange}
@@ -78,9 +79,20 @@ class Login extends Component {
                         </form>
                     </div>
                 </div>
-             )} />
-        ) 
+            )} />
+        )
     }
 }
 
-export default Login;
+const mapStateToProps = state => {
+    return {
+        userObj: state.access.user,
+        error: state.access.error,
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    login: (email, password) => dispatch(login(email, password))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

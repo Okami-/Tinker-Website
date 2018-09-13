@@ -1,5 +1,13 @@
-import initialState from '../initialState'
+import Cookies from 'js-cookie';
 import * as ActionTypes from './types';
+
+const initialState = {
+    user: {
+        isAuthenticated: typeof Cookies.get('authority__loggedUserObj') !== 'undefined',
+        loggedUserObj: Cookies.getJSON('authority__loggedUserObj'),
+    },
+    error: null,
+};
 
 export default function access(state = initialState, action) {
     switch (action.type) {

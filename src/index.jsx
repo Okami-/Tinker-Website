@@ -5,11 +5,13 @@ import style from "./assets/stylesheets/main.scss";
 import './assets/vendor/pe-icon-7-stroke/dist/pe-icon-7-stroke.css';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'
-
+import { login } from './store/Login'
 // Redux Store
 import { Provider } from 'react-redux'
 import { configureStore } from './store'
 const store = configureStore();
+
+// store.dispatch(login());
 
 ReactDOM.render(
     <Provider store={store}>
