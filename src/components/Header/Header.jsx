@@ -3,7 +3,6 @@ import { configureAnchors } from 'react-scrollable-anchor';
 configureAnchors({ offset: -230, scrollDuration: 500 });
 import { connect } from 'react-redux';
 import { logout } from '../../store/login'
-
 import {
     BrowserRouter as Router,
     Link,
@@ -30,21 +29,35 @@ class Header extends Component {
         })
     }
 
+    handleLogout = () => {
+        this.props.logoutUser();
+    }
+
     render() {
-        // console.log(userObj);
+        const { userObj } = this.props;
+        let loggedEle = null;
+        if (userObj.isAuthenticated) {
+            loggedEle = (
+                <a onClick={this.handleLogout}>
+                    LOGOUT
+                </a>
+            )
+        } else {
+            loggedEle = (
+                <Link to="/login">
+                    LOGIN
+                </Link>
+            )
+        }
         return (
-            <header className="header">
+            <header className="header" >
                 <div className="header-container">
                     <div className="logo"><h1>Tinker</h1></div>
                     <button className="hamburger" onClick={this.toggleClass}></button>
                     <ul className={`${this.state.showMenu ? 'visible ' : ''}nav-menu`}>
                         <li><a href="/#section1">ABOUT</a></li>
                         <li><a href="/#section2">SERVICES</a></li>
-                        <li>
-                            <Link to="/login">{
-                                this.props.isLogggedIn ? 'LOGOUT' : 'LOGIN'
-                            }</Link>
-                        </li>
+                        <li>{loggedEle}</li>
                         <li><a href="/#section3">CONTACT</a></li>
 
                     </ul>
@@ -58,4 +71,8 @@ const mapStateToProps = state => ({
     userObj: state.access.user,
 })
 
-export default Header;
+const mapDispatchToProps = dispatch => ({
+    logoutUser: () => dispatch(logout()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
