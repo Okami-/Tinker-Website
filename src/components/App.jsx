@@ -30,7 +30,7 @@ class App extends Component {
 							<ContactForm />
 						</div>
 					} />
-					<Route path="/profile" component={Profile}></Route>
+					<Route path="/profile" component={Profile} />
 					<Route path="/login" component={Login} />
 				</Switch>
 			</div>

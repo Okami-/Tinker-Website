@@ -58,6 +58,7 @@ class Header extends Component {
                                 <li><a href="/#section1">HOME</a></li>
                                 <li><a href="/#section2">SERVICES</a></li>
                                 {loggedEle}
+                                <li><Link to='/blog'>BLOG</Link></li>
                                 <li><a href="/#section3">CONTACT</a></li>
 
                             </ul>
