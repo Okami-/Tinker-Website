@@ -8,7 +8,7 @@ import ContactForm from "./Contact/ContactForm.jsx";
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Login from "../components/Admin/Login.jsx";
 import Profile from "../components/Profile/Profile.jsx";
-class App extends Component{
+class App extends Component {
 
 	constructor() {
 		super();
@@ -17,10 +17,10 @@ class App extends Component{
 		ReactGA.pageview(window.location.pathname);
 	}
 
-	render(){
-		return(
+	render() {
+		return (
 			<div className="App">
-				<Header/>
+				<Header />
 				<Switch>
 					<Route exact path='/' render={props =>
 						<div>
@@ -29,12 +29,12 @@ class App extends Component{
 							<Contact />
 							<ContactForm />
 						</div>
-					} />		
+					} />
 					<Route path="/profile" component={Profile}></Route>
 					<Route path="/login" component={Login} />
 				</Switch>
 			</div>
-		);  
+		);
 	}
 }
 

@@ -33,36 +33,38 @@ class Header extends Component {
         this.props.logoutUser();
     }
 
+
     render() {
         const { userObj } = this.props;
         let loggedEle = null;
         if (userObj.isAuthenticated) {
-            loggedEle = (
-                <a onClick={this.handleLogout}>
-                    LOGOUT
-                </a>
-            )
+            loggedEle = [
+                <li key="{loggedEleProfile}"><Link to="/profile">PROFILE</Link></li>,
+                <li key="{loggedEleLogout}"><Link to="/" onClick={this.handleLogout}>LOGOUT</Link></li>,
+            ]
         } else {
             loggedEle = (
-                <Link to="/login">
-                    LOGIN
-                </Link>
+                <li><Link to="/login">LOGIN</Link></li>
             )
         }
         return (
-            <header className="header" >
-                <div className="header-container">
-                    <div className="logo"><h1>Tinker</h1></div>
-                    <button className="hamburger" onClick={this.toggleClass}></button>
-                    <ul className={`${this.state.showMenu ? 'visible ' : ''}nav-menu`}>
-                        <li><a href="/#section1">ABOUT</a></li>
-                        <li><a href="/#section2">SERVICES</a></li>
-                        <li>{loggedEle}</li>
-                        <li><a href="/#section3">CONTACT</a></li>
+            <div>
+                <Route render={({ history }) => (
+                    <header className="header" >
+                        <div className="header-container">
+                            <div className="logo"><h1>Tinker</h1></div>
+                            <button className="hamburger" onClick={this.toggleClass}></button>
+                            <ul className={`${this.state.showMenu ? 'visible ' : ''}nav-menu`}>
+                                <li><a href="/#section1">HOME</a></li>
+                                <li><a href="/#section2">SERVICES</a></li>
+                                {loggedEle}
+                                <li><a href="/#section3">CONTACT</a></li>
 
-                    </ul>
-                </div>
-            </header>
+                            </ul>
+                        </div>
+                    </header>
+                )} />
+            </div >
         )
     }
 };

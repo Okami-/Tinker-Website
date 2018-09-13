@@ -40,7 +40,6 @@ router.post('/api/login', (req, res, next) => passport.authenticate('local-login
                 return res.json(user);
             }
         });
-
     }
 }
 )(req, res, next));

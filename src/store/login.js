@@ -23,7 +23,6 @@ export function login(email, password) {
                 isAuthenticated: true,
                 loggedUserobj: response.data,
             });
-            // this.props.history.push('/profile');
             Cookies.set('authority__loggedUserObj', response.data, { expires: 1 });
         }).catch(error => {
             if (error.response) {
@@ -34,7 +33,7 @@ export function login(email, password) {
             } else {
                 dispatch({
                     type: ActionTypes.LOGIN_FAILED,
-                    error: null
+                    error: 'null'
                 });
             }
             // console.log(error.response.data.message);

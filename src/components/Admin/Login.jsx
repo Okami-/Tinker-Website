@@ -35,6 +35,7 @@ class Login extends Component {
         e.preventDefault();
         let { email, password } = this.state;
         this.props.login(email, password);
+        this.props.history.push("/profile");
     }
 
     onChange(e) {
