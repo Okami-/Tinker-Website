@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Profile extends Component {
+    constructor(props) {
+        super(props)
+        this.handleCreatePost = this.handleCreatePost.bind(this);
+    }
+    handleChangePassword() {
+
+    }
+
+    handleCreatePost() {
+        this.props.history.push('');
+    }
 
     render() {
         const { userObj } = this.props;
@@ -19,6 +30,9 @@ class Profile extends Component {
                 </div>
                 <div className="profile-password-change">
                     <button className="password-change">Change Password</button>
+                </div>
+                <div className="profile-create-new-post">
+                    <button onClick="">Create Post</button>
                 </div>
                 <div className="profile-post-list">
                     <span className="profile-post-title">Posts</span>

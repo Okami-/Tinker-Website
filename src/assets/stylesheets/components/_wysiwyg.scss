@@ -1,0 +1,33 @@
+#create-post-wysiwyg {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 200px;
+    color: black;
+    h1 {
+        margin-bottom: 50px;
+    }
+    .rdw-editor-main{
+        height: 500px;
+        margin-top: 50px;
+        border: 1px solid #F1F1F1;
+    }
+    .create-post-title {
+        margin-bottom: 50px;
+    }
+    input, output {
+        outline: none;
+        background: transparent;
+        color: black;
+        width: 100%;
+        font-size: 25px;
+        font-weight: 400;
+        padding: 10px 10px 10px 0px;
+        border: 1px solid #F1F1F1;
+        z-index: 502;
+        &::placeholder {
+            color: #FFF;
+        }
+    }
+}
