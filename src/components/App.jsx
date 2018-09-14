@@ -10,6 +10,9 @@ import Login from "../components/Admin/Login.jsx";
 import Profile from "../components/Profile/Profile.jsx";
 import CreatePost from "../components/Blog/CreatePost.jsx";
 import Fullscreen from "../components/Utilities/Fullscreen";
+import { Provider } from 'react-redux'
+import { configureStore } from '../store'
+const store = configureStore();
 
 class App extends Component {
 
@@ -28,6 +31,7 @@ class App extends Component {
 	}
 	render() {
 		return (
+			<Provider store={store}>
 			<div className="App">
 				<Header />
 				<Switch>
@@ -48,6 +52,7 @@ class App extends Component {
 					} />
 				</Switch>
 			</div >
+			 </Provider>
 		);
 	}
 }

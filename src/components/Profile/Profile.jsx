@@ -32,7 +32,7 @@ class Profile extends Component {
                     <button className="password-change">Change Password</button>
                 </div>
                 <div className="profile-create-new-post">
-                    <button onClick="">Create Post</button>
+                    <button>Create Post</button>
                 </div>
                 <div className="profile-post-list">
                     <span className="profile-post-title">Posts</span>
