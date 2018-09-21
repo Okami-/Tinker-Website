@@ -6,17 +6,14 @@ class Profile extends Component {
         super(props)
         this.handleCreatePost = this.handleCreatePost.bind(this);
     }
-    handleChangePassword() {
 
-    }
-
-    handleCreatePost() {
-        this.props.history.push('');
+    handleCreatePost(e) {
+        e.preventDefault();
+        this.props.history.push('/post/new');
     }
 
     render() {
         const { userObj } = this.props;
-        console.log(userObj);
         return (
             <div className="profile-page">
                 <div className="profile-photo">
@@ -26,13 +23,13 @@ class Profile extends Component {
                 <div className="profile-user-info">
                     <span className="profile-name">Name:</span>
                     <br />
-                    <div className="profile-email-user">Email: {userObj.loggedUserObj.email}</div>
+                    {/* <div className="profile-email-user">Email: {userObj.loggedUserObj.email}</div> */}
                 </div>
                 <div className="profile-password-change">
                     <button className="password-change">Change Password</button>
                 </div>
                 <div className="profile-create-new-post">
-                    <button>Create Post</button>
+                    <button onClick={this.handleCreatePost}>Create Post</button>
                 </div>
                 <div className="profile-post-list">
                     <span className="profile-post-title">Posts</span>

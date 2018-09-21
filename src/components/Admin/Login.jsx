@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { login } from '../../store/login'
 
@@ -21,6 +20,7 @@ class Login extends Component {
         userObj: {},
         loginUser: () => null,
     }
+
     state = {
         error: null,
     };
@@ -53,7 +53,7 @@ class Login extends Component {
                     <div className="form-container">
                         <form className="login-form" onSubmit={this.handleLogin}>
                             <button className="exit-login-button" type='button' onClick={() => { history.push('/') }}></button>
-                            <div class="pe-7s-door-lock pe-5x login-symbol"></div>
+                            <div className="pe-7s-door-lock pe-5x login-symbol"></div>
                             <h2>LOG IN</h2>
                             <span className="error-flash">{errorMessage}</span>
                             <input

@@ -44,8 +44,9 @@ router.post('/api/login', (req, res, next) => passport.authenticate('local-login
 }
 )(req, res, next));
 
+
 router.get("/profile", isLoggedIn, (req, res) => {
-    return res.status(200).send('Welcome nugget');
+    return res.status(200).send('Welcome');
 })
 
 router.get('/api/logout', function (req, res) {
@@ -55,6 +56,50 @@ router.get('/api/logout', function (req, res) {
         res.redirect('/');
     })
 });
+
+router.post('/api/posts', (req, res, next) => {
+    const { body } = req;
+    if (!body.title) {
+        return res.status(422).json({
+            errors: {
+                title: 'is required',
+            },
+        });
+    }
+
+    if (!body.userId) {
+        return res.status(422).json({
+            errors: {
+                userId: 'is required',
+            },
+        });
+    }
+
+    if (!body) {
+        return res.status(422).json({
+            errors: {
+                body: 'is required',
+            },
+        });
+    } else {
+        const finalArticle = JSON.stringify(body);
+        client.set('articleDatabase', finalArticle);
+        res.json({
+            msg: 'success'
+        })
+    }
+});
+
+router.get('/api/posts', (req, res, next) => {
+    client.get('articleDatabase', function (err, posts) {
+        if (err) {
+            return res.status(500).end();
+        }
+        posts = JSON.parse(posts)
+        console.log(posts);
+        res.json(posts)
+    })
+})
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on 

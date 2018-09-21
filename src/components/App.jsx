@@ -12,6 +12,8 @@ import CreatePost from "../components/Blog/CreatePost.jsx";
 import Fullscreen from "../components/Utilities/Fullscreen";
 import { Provider } from 'react-redux'
 import { configureStore } from '../store'
+import Blog from '../components/Blog/Blog'
+
 const store = configureStore();
 
 class App extends Component {
@@ -32,27 +34,30 @@ class App extends Component {
 	render() {
 		return (
 			<Provider store={store}>
-			<div className="App">
-				<Header />
-				<Switch>
-					<Route exact path='/' render={(props) =>
-						this.makeFullscreen(
-							<div>
-								<Banner />
-								<Services />
-								<Contact />
-								<ContactForm />
-							</div>
-							, '#202020')
-					} />
-					<Route path="/profile" component={Profile} />
-					<Route path="/login" component={Login} />
-					<Route path="/createpost" render={(props) =>
-						this.makeFullscreen(<CreatePost />, "white")
-					} />
-				</Switch>
-			</div >
-			 </Provider>
+				<Router>
+					<div className="App">
+						<Header />
+						<Switch>
+							<Route exact path='/' render={(props) =>
+								this.makeFullscreen(
+									<div>
+										<Banner />
+										<Services />
+										<Contact />
+										<ContactForm />
+									</div>
+									, '#202020')
+							} />
+							<Route path="/profile" component={Profile} />
+							<Route path="/login" component={Login} />
+							<Route path="/post/new" render={(props) =>
+								this.makeFullscreen(<CreatePost />, "white")
+							} />
+							<Route path="/blog" component={Blog} />
+						</Switch>
+					</div >
+				</Router>
+			</Provider >
 		);
 	}
 }

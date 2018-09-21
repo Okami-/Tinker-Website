@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { logout } from '../../store/login'
 import {
     BrowserRouter as Router,
-    Link,
     Route,
 } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 
 class Header extends Component {
 
@@ -55,11 +55,11 @@ class Header extends Component {
                             <div className="logo"><h1>Tinker</h1></div>
                             <button className="hamburger" onClick={this.toggleClass}></button>
                             <ul className={`${this.state.showMenu ? 'visible ' : ''}nav-menu`}>
-                                <li><a href="/#section1">HOME</a></li>
-                                <li><a href="/#section2">SERVICES</a></li>
+                                <li><Link to="/#section1">HOME</Link></li>
+                                <li><Link to="/#section2">SERVICES</Link></li>
                                 {loggedEle}
                                 <li><Link to='/blog'>BLOG</Link></li>
-                                <li><a href="/#section3">CONTACT</a></li>
+                                <li><Link to="/#section3">CONTACT</Link></li>
 
                             </ul>
                         </div>
