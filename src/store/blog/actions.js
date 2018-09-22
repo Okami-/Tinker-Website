@@ -5,22 +5,23 @@ export function fetchPosts(posts) {
     return dispatch => {
         dispatch({
             type: ActionTypes.FETCH_POSTS,
+            loading: true,
         });
         axios({
             method: "GET",
             url: "/api/posts",
             data: posts,
         }).then(response => {
-            console.log(response);
             dispatch({
                 type: ActionTypes.FETCH_POSTS_SUCCESS,
-                payload: response.data
+                payload: [response.data]
             });
+
         }).catch(error => {
             if (error.response) {
                 dispatch({
                     type: ActionTypes.FETCH_POSTS_FAILURE,
-                    error: error.response.data,
+                    payload: error,
                 });
             } else {
                 dispatch({
