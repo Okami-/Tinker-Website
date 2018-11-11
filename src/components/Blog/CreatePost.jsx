@@ -3,17 +3,13 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPost } from '../../store/blog/actions';
-// Comment 1
 
 export class CreatePost extends Component {
-  // Comment 2
   renderField(field) {
-    // Comment 14
     const { meta: {touched, error} } = field;
     const className = `form-group ${touched && error ? "border border-danger" : ''}`;
 
     return (
-      // Comment 3
       <div className="form-group">
         <label>{field.label}</label>
         <input type="text" {...field.input} className="form-control"/>
@@ -23,21 +19,17 @@ export class CreatePost extends Component {
       </div>
     );
   }
+  
   onSubmit(values) {
-    // comment 15, 18
     this.props.createPost(values, () => {
       this.props.history.push('/posts');
     });
-    // comment 16, 17
-    // this.props.history.push('/');
   }
-  // comment 8
+
   render() {
     console.log(this.props);
-    const { handleSubmit } = this.props; // comment 13
+    const { handleSubmit } = this.props; 
     return (
-      // Comment 9, 10, 11
-      // this === component
       <div id="create-post-wysiwyg">
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
@@ -79,13 +71,9 @@ function validate(values) {
     errors.content = "Post must have content."
   }
 
-  // If errors is empty; form is fine to submit (redux-forms does this automatically).
-  // If errors has any properties, redux form assumes form is invalid; does not submit.
   return errors;
 }
 
-// Comment 4, 5, 14
-// how do we combine the connect helper for our action creator/reducer AND redux-form? below:
 export default reduxForm({
     validate: validate,
     form: 'PostsNewForm',

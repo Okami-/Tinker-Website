@@ -26,7 +26,7 @@ export function fetchPostsFailure(error) {
     };
 }
 
-export function createPost(values) {
+export function createPost(values, callback) {
     const request = axios({
         method: 'POST',
         data: values,
@@ -61,7 +61,7 @@ export function resetNewPost() {
 
 export function resetDeletedPost() {
     return {
-        type: RESET_DELETED_POST
+        type: ActionTypes.RESET_DELETED_POST
     }
 }
 ;
@@ -80,49 +80,46 @@ export function fetchPost(id) {
 
 export function fetchPostSuccess(activePost) {
     return {
-        type: FETCH_POST_SUCCESS,
+        type: ActionTypes.FETCH_POST_SUCCESS,
         payload: activePost
     };
 }
 
 export function fetchPostFailure(error) {
     return {
-        type: FETCH_POST_FAILURE,
+        type: ActionTypes.FETCH_POST_FAILURE,
         payload: error
     };
 }
 
 export function resetActivePost() {
     return {
-        type: RESET_ACTIVE_POST
+        type: ActionTypes.RESET_ACTIVE_POST
     }
 }
 
 
-export function deletePost(id, tokenFromStorage) {
+export function deletePost(id) {
     const request = axios({
         method: 'delete',
-        url: `api/posts/${id}`,
-        headers: {
-            'Authorization': `Bearer ${tokenFromStorage}`
-        }
+        url: `/api/posts/${id}`,
     });
     return {
-        type: DELETE_POST,
+        type: ActionTypes.DELETE_POST,
         payload: request
     };
 }
 
 export function deletePostSuccess(deletedPost) {
     return {
-        type: DELETE_POST_SUCCESS,
+        type: ActionTypes.DELETE_POST_SUCCESS,
         payload: deletedPost
     };
 }
 
 export function deletePostFailure(response) {
     return {
-        type: DELETE_POST_FAILURE,
+        type: ActionTypes.DELETE_POST_FAILURE,
         payload: response
     };
 }

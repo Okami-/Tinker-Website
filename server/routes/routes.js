@@ -118,7 +118,7 @@ router.post('/api/posts', (req, res, next) => {
     });
   }
 
-  if(!body.content) {
+  if(!body.body) {
     return res.status(422).json({
       errors: {
         body: 'is required',
@@ -178,7 +178,7 @@ router.patch('/api/posts/:id', (req, res, next) => {
     .catch(next);
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/api/posts/:id', (req, res, next) => {
   return Articles.findByIdAndRemove(req.article._id)
     .then(() => res.sendStatus(200))
     .catch(next);
