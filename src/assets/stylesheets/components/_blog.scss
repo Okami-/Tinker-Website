@@ -10,10 +10,55 @@
 
 .posts-listing {
 	color: black;
-	margin-top: 200px;
+	margin-top: 70px;
+	min-height: 100vh;
+	background-color: #FFF;
+	padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    h2 {
+    	text-align: center;
+    }
+    .posts-list {
+    	margin-top: 50px;
+    	li {
+    		background-color: #D6D6D6;
+    		border: 20px solid #FFF;
+    		margin-bottom: 15px;
+    		text-transform: uppercase;
+    		font-size: 25px;
+    		height: 200px;
+    		text-align: center;
+    		a {
+    			text-decoration: none;
+    			color: white;
+    			&:hover{
+    				color: pink;
+    				text-decoration: underline;
+    			}
+    		}
+    	}
+    }
 }
 
 .post-listing {
 	color: black;
-	margin-top: 200px;
+	margin-top: 70px;
+	min-height: 100vh;
+	background-color: #FFF;
+	padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    .post-date-created {
+    	color: #9c9c9c;
+    	text-align: center;
+    	margin-top: 40px;
+    }
+}
+
+#create-post-wysiwyg {
+	color: black;
+	margin-top: 70px;
+	min-height: 100vh;
+	background-color: #FFF;
 }

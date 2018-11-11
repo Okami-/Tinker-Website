@@ -20,7 +20,6 @@ class Header extends Component {
             isLoggedIn: false
         };
     }
-
     // Mobile Menu Logic
     toggleClass(event) {
         const currentState = this.state.showMenu;
@@ -54,11 +53,11 @@ class Header extends Component {
                             <div className="logo"><h1>Tinker</h1></div>
                             <button className="hamburger" onClick={this.toggleClass}></button>
                             <ul className={`${this.state.showMenu ? 'visible ' : ''}nav-menu`}>
-                                <li><Link to="/#section1">HOME</Link></li>
-                                <li><Link to="/#section2">SERVICES</Link></li>
+                                <li><Link to="/">HOME</Link></li>
+                                {/*<li><Link to="/#section2">SERVICES</Link></li>*/}
                                 {loggedEle}
                                 <li><Link to='/posts'>BLOG</Link></li>
-                                <li><Link to="/#section3">CONTACT</Link></li>
+                                <li><Link to="/">CONTACT</Link></li>
 
                             </ul>
                         </div>

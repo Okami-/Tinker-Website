@@ -6,7 +6,7 @@ import './assets/vendor/pe-icon-7-stroke/dist/pe-icon-7-stroke.css';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import { configureStore } from './store';
-
+import ScrollToTop from "./components/Utilities/ScrollToTop.jsx";
 import Login from "./components/Admin/Login.jsx";
 import App from "./components/App.jsx";
 import Header from "./components/Header/Header.jsx";
@@ -26,8 +26,9 @@ const store = configureStore();
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
-			<div>
+		<BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
+			<div><ScrollToTop>
+				<App />
 				<Header />
 				<Switch>
 					<Route path="/posts/new" component={CreatePost} />
@@ -44,6 +45,7 @@ ReactDOM.render(
 							</div>
 					} />
 				</Switch>
+				</ScrollToTop>
 			</div>
 		</BrowserRouter>
 	</Provider >

@@ -1,17 +1,17 @@
 .logo {
     float: left;
     h1 {
-        font-size: 55px;
+        font-size: 30px;
         font-weight: 300;
         letter-spacing: 4px;
         @media (max-width: $tablet) {
-            font-size: 35px;
+            font-size: 20px;
         }
     }
 }
 .header {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     @include clearfix;
     position:fixed;
     overflow: hidden;
@@ -26,12 +26,17 @@
         padding: 14px 0;
     }
     .header-container {
+        display: flex;
+        align-items: center;
         padding-left: 15px;
         padding-right: 15px;
         max-width: 1440px;
         position: relative;
         @include clearfix;
-        margin: 0 auto;   
+        margin: 0 auto;
+        @media (max-width: $tablet) {
+            display: block;
+        }   
     }
 }
 .hamburger {
@@ -44,7 +49,7 @@
             display: block;
             position: fixed;
             right: 30px;
-            top: 3px;
+            top: -8px;
             color: #FFFFFF;
         }
     }
@@ -55,8 +60,8 @@
     padding: 0;
 }
 .nav-menu {
-    padding-top: 20px;
     float: right;
+    margin-left: auto;
     @media (max-width: $tablet) {
         padding-top: 0px;
         &.visible {
@@ -70,7 +75,7 @@
                 }
                 margin-bottom: 30px;
                 display: block;
-                font-size: 20px;
+                font-size: 15px;
                 @include clearfix;
                 width: 100%;
                 float: none;
@@ -89,8 +94,8 @@
             float: none;
         } 
         float: left;
-        margin-right: 30px;
-        font-size: 20px;
+        margin-right: 15px;
+        font-size: 17px;
         a {
             text-decoration: none;
             color: #FFFFFF;
@@ -103,7 +108,7 @@
     li:last-child {
         margin-right: 0;
         a {
-            padding: 12px 12px 12px 12px;
+            padding: 5px;
             border-radius: 5px;
             background: $button-gradient;
             @media (max-width: $tablet) {

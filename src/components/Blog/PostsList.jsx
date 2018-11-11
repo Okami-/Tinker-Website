@@ -8,12 +8,13 @@ class PostsIndex extends Component {
   componentWillMount() {
     this.props.fetchPosts();
   }
+
   renderPosts(posts) {
     return _.map(posts.posts, post => {
       return (
-        <li className="list-group-item" key={post._id}>
-          <Link to={`/posts/${post._id}`}>{post.title}</Link>
-        </li>
+          <li className="list-group-item col-md-6 col-sm-12" key={post._id}>
+            <Link to={`/posts/${post._id}`}>{post.title}</Link>
+          </li>
       );
     });
   }
@@ -22,10 +23,12 @@ class PostsIndex extends Component {
     console.log(posts)
     return (
        <div className="posts-listing">
-            <h1>hello</h1>
-            <ul className="posts-list">
-                {this.renderPosts(posts)}
-            </ul>
+         <div className="container">
+              <h2>Recent Posts</h2>
+              <ul className="posts-list row">
+                  {this.renderPosts(posts)}
+              </ul>
+          </div>
         </div>
     );
   }

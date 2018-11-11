@@ -9,6 +9,10 @@ class App extends Component {
 			</Fullscreen>
 		);
 	}
+	componentDidMount(){
+ 		document.body.style.background = "#202020";
+	}
+
 	constructor() {
 		super();
 		// Google analytics initialization 
@@ -17,7 +21,7 @@ class App extends Component {
 	}
 	render() {
 		return (
-			<h1>hi</h1>
+			<div className="app"></div>
 		);
 	}
 }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PostsList from "./PostsList"
 
 class Blog extends Component {
-
     render() {
         return (
             <div className="blog-posts">
