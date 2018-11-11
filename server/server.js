@@ -11,6 +11,19 @@ const RedisStore = require('connect-redis')(session);
 const routes = require('./routes/routes');
 const redis = require('redis');
 const { promisify } = require('util');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/lightblog');
+mongoose.set('debug', true);
+
+// Add models
+// Add routes
+
+// app.use((req, res, next) => {
+//   const err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
 // DB connection ======================================================================
 client = redis.createClient();

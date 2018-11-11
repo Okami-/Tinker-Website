@@ -1,77 +1,40 @@
 import * as ActionTypes from './types';
 import axios from 'axios';
 
-export function fetchPosts(posts) {
-    return dispatch => {
-        dispatch({
-            type: ActionTypes.FETCH_POSTS,
-            loading: true,
-        });
-        axios({
-            method: "GET",
-            url: "/api/posts",
-            data: posts,
-        }).then(response => {
-            dispatch({
-                type: ActionTypes.FETCH_POSTS_SUCCESS,
-                payload: [response.data]
-            });
-
-        }).catch(error => {
-            if (error.response) {
-                dispatch({
-                    type: ActionTypes.FETCH_POSTS_FAILURE,
-                    payload: error,
-                });
-            } else {
-                dispatch({
-                    type: ActionTypes.FETCH_POSTS_FAILURE,
-                    error: 'null'
-                });
-            }
-        })
+export function fetchPosts() {
+    const request = axios({
+        method: 'GET',
+        url: '/api/posts'
+    });
+    return {
+        type: ActionTypes.FETCH_POSTS,
+        payload: request
     }
 }
 
 export function fetchPostsSuccess(posts) {
     return {
-        type: FETCH_POSTS_SUCCESS,
+        type: ActionTypes.FETCH_POSTS_SUCCESS,
         payload: posts
     };
 }
 
 export function fetchPostsFailure(error) {
     return {
-        type: FETCH_POSTS_FAILURE,
+        type: ActionTypes.FETCH_POSTS_FAILURE,
         payload: error
     };
 }
 
-export function createPost(props) {
-    return dispatch => {
-        axios({
-            method: "POST",
-            url: "/api/posts",
-            data: props,
-        }).then(response => {
-            dispatch({
-                type: ActionTypes.CREATE_POST_SUCCESS,
-            });
-            history.push('/blog');
-        }).catch(error => {
-            if (error.response) {
-                dispatch({
-                    type: ActionTypes.CREATE_POST_FAILURE,
-                    error: error.response.data,
-                });
-            } else {
-                dispatch({
-                    type: ActionTypes.CREATE_POST_SUCCESS,
-                    error: 'null'
-                });
-            }
-            // console.log(error.response.data.message);
-        })
+export function createPost(values) {
+    const request = axios({
+        method: 'POST',
+        data: values,
+        url: '/api/posts',
+    }).then (() => callback())
+    return {
+        type: ActionTypes.CREATE_POST,
+        payload: request
     }
 }
 
@@ -103,31 +66,14 @@ export function resetDeletedPost() {
 }
 ;
 
-export function fetchPost(props) {
-    return dispatch => {
-        axios({
-            method: "GET",
-            url: "/api/posts",
-            data: props,
-        }).then(response => {
-            dispatch({
-                type: ActionTypes.FETCH_POST_SUCCESS,
-
-            });
-        }).catch(error => {
-            if (error.response) {
-                dispatch({
-                    type: ActionTypes.FETCH_POST_FAILURE,
-                    error: error.response.data,
-                });
-            } else {
-                dispatch({
-                    type: ActionTypes.FETCH_POST_FAILURE,
-                    error: 'null'
-                });
-            }
-            // console.log(error.response.data.message);
-        })
+export function fetchPost(id) {
+    const request = axios({
+        method: 'GET',
+        url: `/api/posts/${id}`
+    });
+    return {
+        type: ActionTypes.FETCH_POST,
+        payload: request
     }
 }
 

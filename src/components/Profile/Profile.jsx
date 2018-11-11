@@ -9,7 +9,7 @@ class Profile extends Component {
 
     handleCreatePost(e) {
         e.preventDefault();
-        this.props.history.push('/post/new');
+        this.props.history.push('/posts/new');
     }
 
     render() {

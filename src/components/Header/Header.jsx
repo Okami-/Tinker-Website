@@ -49,7 +49,6 @@ class Header extends Component {
         }
         return (
             <div>
-                <Route render={({ history }) => (
                     <header className="header" >
                         <div className="header-container">
                             <div className="logo"><h1>Tinker</h1></div>
@@ -58,13 +57,13 @@ class Header extends Component {
                                 <li><Link to="/#section1">HOME</Link></li>
                                 <li><Link to="/#section2">SERVICES</Link></li>
                                 {loggedEle}
-                                <li><Link to='/blog'>BLOG</Link></li>
+                                <li><Link to='/posts'>BLOG</Link></li>
                                 <li><Link to="/#section3">CONTACT</Link></li>
 
                             </ul>
                         </div>
                     </header>
-                )} />
+            
             </div >
         )
     }

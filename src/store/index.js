@@ -3,6 +3,7 @@ import { rootReducer } from './rootReducer'
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension';
+import promise from 'redux-promise';
 
 // Applies logger only in development 
 // by creating a middlewares array and adding it into the applyMiddleware paramater
@@ -22,6 +23,7 @@ export function configureStore(initialState) {
     composeWithDevTools (
       applyMiddleware(
         thunk,
+        promise,
         reduxImmutableStateInvariant(),
         ...middlewares,
       )

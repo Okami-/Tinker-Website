@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import access from './login/reducer'
-import blog from './blog/reducer'
+import PostsReducer from './blog/reducer'
+import { reducer as formReducer } from 'redux-form';
 
 export const rootReducer = combineReducers({
     access,
-    blog
+    posts: PostsReducer,
+    form: formReducer
 })

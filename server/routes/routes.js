@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const transporter = require('../config/nodemailer');
 const passport = require('../config/passport');
+const mongoose = require('mongoose');
+require('../models/Articles.js');
+
+const Articles = mongoose.model('Articles');
 
 router.post('/api/send', (req, res, next) => {
     var name = req.body.name
@@ -57,49 +61,128 @@ router.get('/api/logout', function (req, res) {
     })
 });
 
+// router.post('/api/posts', (req, res, next) => {
+//     var post = []
+//     var postId = client.incr
+//     post.id = postId
+//     post.content = req.body.content
+//     post.title = req.body.title
+//     console.log(post.id);
+//     if (!post.title) {
+//         return res.status(422).json({
+//             errors: {
+//                 title: 'is required',
+//             },
+//         });
+//     }
+//     if (!post.content) {
+//         return res.status(422).json({
+//             errors: {
+//                 body: 'is required',
+//             },
+//         });
+//     } else {
+//         // const finalArticle = JSON.stringify(body);
+//         client.incr('id', function(err, id) {
+//             client.hmset(
+//                 'post:'+id, 
+//                 'title', post.title,
+//                 'content', post.content
+//             );
+//         })
+//         res.json({
+//             msg: 'success'
+//         })
+//     }
+// });
+
+// router.get('/api/posts', (req, res, next) => {
+//     client.hgetall('post', function (err, posts) {
+//         if (err) {
+//             return res.status(500).end();
+//         }
+//         console.log(posts)
+//         posts = JSON.parse(posts)
+//         console.log(posts);
+//         res.json(posts)
+//     })
+// })
 router.post('/api/posts', (req, res, next) => {
-    const { body } = req;
-    if (!body.title) {
-        return res.status(422).json({
-            errors: {
-                title: 'is required',
-            },
-        });
-    }
+  const { body } = req;
+  console.log(body)
+  if(!body.title) {
+    return res.status(422).json({
+      errors: {
+        title: 'is required',
+      },
+    });
+  }
 
-    if (!body.userId) {
-        return res.status(422).json({
-            errors: {
-                userId: 'is required',
-            },
-        });
-    }
+  if(!body.content) {
+    return res.status(422).json({
+      errors: {
+        body: 'is required',
+      },
+    });
+  }
 
-    if (!body) {
-        return res.status(422).json({
-            errors: {
-                body: 'is required',
-            },
-        });
-    } else {
-        const finalArticle = JSON.stringify(body);
-        client.set('articleDatabase', finalArticle);
-        res.json({
-            msg: 'success'
-        })
-    }
+  const finalArticle = new Articles(body);
+  console.log(finalArticle)
+  return finalArticle.save()
+    .then(() => res.json({ article: finalArticle.toJSON() }))
+    .catch(next);
 });
 
 router.get('/api/posts', (req, res, next) => {
-    client.get('articleDatabase', function (err, posts) {
-        if (err) {
-            return res.status(500).end();
-        }
-        posts = JSON.parse(posts)
-        console.log(posts);
-        res.json(posts)
-    })
-})
+  return Articles.find()
+    .sort({ createdAt: 'descending' })
+    .then((articles) => res.json({ posts: articles.map(article => article.toJSON()) }))
+    .catch(next);
+});
+
+router.param('id', (req, res, next, id) => {
+  console.log(id);
+  return Articles.findById(id, (err, article) => {
+    if(err) {
+      return res.sendStatus(404);
+    } else if(article) {
+      req.article = article;
+      return next();
+    }
+  }).catch(next);
+});
+
+router.get('/api/posts/:id', (req, res, next) => {
+  return res.json({
+    post: req.article.toJSON(),
+  });
+});
+
+router.patch('/api/posts/:id', (req, res, next) => {
+  const { body } = req;
+
+  if(typeof body.title !== 'undefined') {
+    req.article.title = body.title;
+  }
+
+  if(typeof body.author !== 'undefined') {
+    req.article.author = body.author;
+  }
+
+  if(typeof body.body !== 'undefined') {
+    req.article.body = body.body;
+  }
+
+  return req.article.save()
+    .then(() => res.json({ article: req.article.toJSON() }))
+    .catch(next);
+});
+
+router.delete('/:id', (req, res, next) => {
+  return Articles.findByIdAndRemove(req.article._id)
+    .then(() => res.sendStatus(200))
+    .catch(next);
+});
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on 

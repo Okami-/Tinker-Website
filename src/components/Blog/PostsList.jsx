@@ -1,53 +1,48 @@
-import React, { Component } from "react";
-import { fetchPosts, fetchPostsSuccess, fetchPostsFailure } from '../../store/blog/actions.js'
+import _ from 'lodash';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import draftToHtml from 'draftjs-to-html';
+import { Link } from 'react-router-dom';
+import { fetchPosts, fetchPostsSuccess } from '../../store/blog/actions.js';
 
-class PostsList extends Component {
-
-    componentDidMount() {
-        this.props.dispatch(fetchPosts());
-    }
-
-    renderPosts(posts) {
-
-        return posts.map((post) => {
-            const markup = draftToHtml(
-                post.content
-            );
-            console.log(markup)
-            return (
-                <li className="list-group-item" key={post.userId}>
-                    <h3 className="list-group-heading">{post.title}</h3>
-                    <div className="content">
-                        {markup}
-                    </div>
-                </li>
-            )
-        })
-    }
-
-    render() {
-        const { posts, loading, error } = this.props.postsList;
-        if (loading) {
-            return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>
-        } else if (error) {
-            return <div className="alert alert-danger">Error: {error.message}</div>
-        }
-        return (
-            <div className="posts-listing">
-                <h1>hello</h1>
-                <ul className="posts-list">
-                    {this.renderPosts(posts)}
-                </ul>
-            </div>
-        )
-    }
+class PostsIndex extends Component {
+  componentWillMount() {
+    this.props.fetchPosts();
+  }
+  renderPosts(posts) {
+    return _.map(posts.posts, post => {
+      return (
+        <li className="list-group-item" key={post._id}>
+          <Link to={`/posts/${post._id}`}>{post.title}</Link>
+        </li>
+      );
+    });
+  }
+  render() {
+    const { posts, loading, error } = this.props.postsList;
+    console.log(posts)
+    return (
+       <div className="posts-listing">
+            <h1>hello</h1>
+            <ul className="posts-list">
+                {this.renderPosts(posts)}
+            </ul>
+        </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-    postsList: state.blog.postsList
+  postsList: state.posts.postsList
 });
 
-export default connect(mapStateToProps)(PostsList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: () => {
+      dispatch(fetchPosts()).then((response) => {
+            !response.error ? dispatch(fetchPostsSuccess(response.payload.data)) : dispatch(fetchPostsFailure(response.payload.data));
+          });
+    }
+  }
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(PostsIndex);
