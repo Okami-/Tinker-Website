@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPost, deletePost, fetchPostFailure, fetchPostSuccess, deletePostSuccess, resetActivePost, resetDeletedPost} from '../../store/blog/actions.js';
 import Moment from 'react-moment'
+import renderHTML from 'react-render-html';
+
 class PostsShow extends Component {
   componentDidMount() {
     // id is created from the server than assigned to a url link that leads to the single post which is then 
@@ -44,7 +46,7 @@ class PostsShow extends Component {
           className="btn btn-danger float-right"
           onClick={this.onDeleteClick.bind(this)}>Delete</button>
         <h6>Categories: {post.post.categories}</h6>
-        <div>{post.post.body}</div>
+        <div>{renderHTML(post.post.body)}</div>
         <Link className="btn btn-secondary btn-sm" to="/posts">Back to Posts</Link>
         <div className="post-date-created">
           <Moment format="MMMM DD, YYYY">{post.post.createdAt}</Moment>

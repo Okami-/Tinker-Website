@@ -3,8 +3,29 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPost } from '../../store/blog/actions';
+import ReactQuill from 'react-quill'; 
+import 'react-quill/dist/quill.snow.css'
+
 
 export class CreatePost extends Component {
+
+  renderQuill({ input }) {
+    return (
+      <ReactQuill
+        modules={CreatePost.modules} 
+        {...input}
+        onChange={(newValue, delta, source) => {
+          if (source === 'user') {
+            input.onChange(newValue);
+          }
+        }}
+        onBlur={(range, source, quill) => {
+          input.onBlur(quill.getHTML());
+        }}
+      />
+    );  
+  }
+
   renderField(field) {
     const { meta: {touched, error} } = field;
     const className = `form-group ${touched && error ? "border border-danger" : ''}`;
@@ -27,7 +48,6 @@ export class CreatePost extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { handleSubmit } = this.props; 
     return (
       <div id="create-post-wysiwyg">
@@ -40,17 +60,30 @@ export class CreatePost extends Component {
           name="categories"
           label="Categories"
           component={this.renderField} />
-        <Field
+        {/*<Field
           name="body"
           label="body"
-          component={this.renderField} />
-          {/* Comment 11*/}
+          component={this.renderField} />*/}
+        <Field 
+          name="body" 
+          component={this.renderQuill}
+        />
         <button type="submit" className="btn btn-primary">Create Post</button>
         <Link className="ml-2 btn btn-danger" to="/">Cancel</Link>
       </form>
       </div>
     );
   }
+}
+
+CreatePost.modules = {
+  toolbar: [
+    [{ 'header': [1, 2, false] }],
+    ['bold', 'italic', 'underline','strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image'],
+    ['clean']
+  ],
 }
 
 // comment 6
