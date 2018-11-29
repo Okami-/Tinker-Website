@@ -123,3 +123,14 @@ export function deletePostFailure(response) {
         payload: response
     };
 }
+
+export function editPost(values, id) {
+    const request = axios({
+        method: 'PUT',
+        url: `/api/posts/${id}`,
+    });
+    return {
+        type: ActionTypes.EDIT_POST,
+        payload: request
+    }
+}

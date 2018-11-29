@@ -61,52 +61,6 @@ router.get('/api/logout', function (req, res) {
     })
 });
 
-// router.post('/api/posts', (req, res, next) => {
-//     var post = []
-//     var postId = client.incr
-//     post.id = postId
-//     post.content = req.body.content
-//     post.title = req.body.title
-//     console.log(post.id);
-//     if (!post.title) {
-//         return res.status(422).json({
-//             errors: {
-//                 title: 'is required',
-//             },
-//         });
-//     }
-//     if (!post.content) {
-//         return res.status(422).json({
-//             errors: {
-//                 body: 'is required',
-//             },
-//         });
-//     } else {
-//         // const finalArticle = JSON.stringify(body);
-//         client.incr('id', function(err, id) {
-//             client.hmset(
-//                 'post:'+id, 
-//                 'title', post.title,
-//                 'content', post.content
-//             );
-//         })
-//         res.json({
-//             msg: 'success'
-//         })
-//     }
-// });
-
-// router.get('/api/posts', (req, res, next) => {
-//     client.hgetall('post', function (err, posts) {
-//         if (err) {
-//             return res.status(500).end();
-//         }
-//         console.log(posts)
-//         posts = JSON.parse(posts)
-//         console.log(posts);
-//         res.json(posts)
-//     })
-// })
 router.post('/api/posts', (req, res, next) => {
   const { body } = req;
   console.log(body)
@@ -183,6 +137,12 @@ router.delete('/api/posts/:id', (req, res, next) => {
     .then(() => res.sendStatus(200))
     .catch(next);
 });
+
+router.put('/api/posts/:id', (req, res, next) => {
+  return Articles.findByIdAndUpdate(req.article._id)
+  .then(() => res.sendStatus(200))
+  .catch(next);
+})
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on 

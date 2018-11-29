@@ -5,7 +5,15 @@
     padding-right: 30px;
     margin-top: 200px;
     color: black;
+    p {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 24px;
+    }
     h1 {
+        margin-bottom: 50px;
+    }
+    h2.create-post-wysiwyg-title {
         margin-bottom: 50px;
     }
     .rdw-editor-main{
@@ -15,6 +23,10 @@
     }
     .create-post-title {
         margin-bottom: 50px;
+    }
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
     }
     input, output {
         outline: none;
@@ -26,8 +38,12 @@
         padding: 10px 10px 10px 0px;
         border: 1px solid #F1F1F1;
         z-index: 502;
+        margin-bottom: 20px;
         &::placeholder {
             color: #FFF;
         }
+    }
+    .quill {
+        margin-bottom: 20px;
     }
 }

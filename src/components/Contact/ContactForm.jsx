@@ -27,7 +27,6 @@ class ContactForm extends Component {
         })
     }
 
-
     resetForm() {
         document.getElementById('contact-form').reset();
     }

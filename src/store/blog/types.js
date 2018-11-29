@@ -22,6 +22,12 @@ export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
 export const FETCH_POST_FAILURE = 'FETCH_POST_FAILURE';
 export const RESET_ACTIVE_POST = 'RESET_ACTIVE_POST';
 
+//Edit post
+
+export const EDIT_POST = 'EDIT_POST';
+export const EDIT_POST_SUCCESS = 'EDIT_POST_SUCCESS';
+export const EDIT_POST_FAILURE = 'EDIT_POST_FAILURE';
+
 //Delete post
 export const DELETE_POST = 'DELETE_POST';
 export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';

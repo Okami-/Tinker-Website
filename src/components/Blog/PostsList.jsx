@@ -13,7 +13,11 @@ class PostsIndex extends Component {
     return _.map(posts.posts, post => {
       return (
           <li className="list-group-item col-md-6 col-sm-12" key={post._id}>
-            <Link to={`/posts/${post._id}`}>{post.title}</Link>
+            <div className="post-meta-data">
+              <h2>
+                <Link to={`/posts/${post._id}`}>{post.title}</Link>
+              </h2>
+            </div>
           </li>
       );
     });

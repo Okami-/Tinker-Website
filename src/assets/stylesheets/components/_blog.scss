@@ -29,30 +29,81 @@
     		font-size: 25px;
     		height: 300px;
     		text-align: center;
-    		a {
-    			text-decoration: none;
-    			color: white;
-    			&:hover{
-    				color: pink;
-    				text-decoration: underline;
-    			}
-    		}
+            @include clearfix;
+            .post-meta-data{ 
+                // position: absolute;
+                // z-index: 12;
+                // width: 93%;
+                // top: 26%;
+                a {
+                	text-decoration: none;
+                	color: #000000;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    padding: 0 10%;
+                    @include clearfix;
+                	&:hover{
+                		color: #FFFFFF;
+                        background: rgba(255, 255, 255, 0.2);
+                	}
+                }
+             }
     	}
     }
 }
 
 .post-listing {
-	color: black;
+	color: #404040;
 	margin-top: 70px;
 	min-height: 100vh;
 	background-color: #FFF;
 	padding-left: 15px;
     padding-right: 15px;
     padding-top: 30px;
-    .post-date-created {
-    	color: #9c9c9c;
-    	text-align: center;
-    	margin-top: 40px;
+    .post-body {
+        h3 {
+            text-align: center;
+        }
+        .ql-syntax {
+            color: white;
+            background-color: black;
+        }
+        p {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 24px;
+        }
+    }
+    .post-footer {
+        text-align: center;
+        padding-bottom: 40px;
+        overflow:hidden;
+        clear:both;
+        a {
+            text-decoration: none;
+        }
+        .cb-separator {
+            font-size: .7em;
+            vertical-align: middle;
+            display: inline-block;
+            margin: 0 12px;
+        }
+        .post-date-created {
+            width: 100%;
+            color: #9c9c9c;
+            margin-top: 40px;
+            text-transform: uppercase;
+            font-size: 14px;
+            vertical-align: middle;
+            display: inline-block;
+            span {
+                vertical-align: middle;
+                display: inline-block;
+            }
+        }
     }
 }
 
@@ -61,4 +112,5 @@
 	margin-top: 70px;
 	min-height: 100vh;
 	background-color: #FFF;
+    padding-top: 100px;
 }

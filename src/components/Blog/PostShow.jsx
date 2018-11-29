@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPost, deletePost, fetchPostFailure, fetchPostSuccess, deletePostSuccess, resetActivePost, resetDeletedPost} from '../../store/blog/actions.js';
+import { fetchPost, deletePost, fetchPostFailure, fetchPostSuccess, deletePostSuccess, resetActivePost, resetDeletedPost, editPost, editPostSuccess} from '../../store/blog/actions.js';
 import Moment from 'react-moment'
 import renderHTML from 'react-render-html';
+import ReactQuill, { Quill } from 'react-quill'; 
 
 class PostsShow extends Component {
   componentDidMount() {
@@ -33,23 +34,44 @@ class PostsShow extends Component {
       history.push('/')
     });
   }
+  onEditClick() {
+    const { id } = this.props.match.params;
+    this.props.history.push('/posts/edit/' + id)
+  }
   render() {
     const { post, loading, error } = this.props.activePost;
-    console.log(post);
+    const author = this.props.userObj.loggedUserObj.userName
     if (!post) {
       return <div>Loading...</div>;
     }
-    return (
+    return (  
       <div className="post-listing">
-        <h2>{post.post.title}</h2>
-        <button
-          className="btn btn-danger float-right"
-          onClick={this.onDeleteClick.bind(this)}>Delete</button>
-        <h6>Categories: {post.post.categories}</h6>
-        <div>{renderHTML(post.post.body)}</div>
-        <Link className="btn btn-secondary btn-sm" to="/posts">Back to Posts</Link>
-        <div className="post-date-created">
-          <Moment format="MMMM DD, YYYY">{post.post.createdAt}</Moment>
+        <div className="container">
+          <div class="post-body">
+            <h3>{post.post.title}</h3>
+            <button
+              className="btn btn-danger float-right"
+              onClick={this.onDeleteClick.bind(this)}>Delete</button>
+            <button 
+            className="btn btn-danger"
+            onClick={this.onEditClick.bind(this)}
+            >
+              Edit
+            </button>
+            <h6>Categories: {post.post.categories}</h6>
+            <div>{renderHTML(post.post.body)}</div>
+          </div>
+          
+          <div className="post-footer">
+          <Link className="btn btn-secondary btn-sm" to="/posts">Back to Posts</Link>
+            <div className="post-date-created">
+              <span className="post-author">{author}</span>
+              <span className="cb-separator">
+                <i className="fa fa-times"></i>
+              </span>
+              <span className="post-date"><Moment format="MMMM DD, YYYY">{post.post.createdAt}</Moment></span>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -60,10 +82,10 @@ function mapStateToProps(globalState, ownProps) {
   return {
     activePost: globalState.posts.activePost,
     postId: ownProps.id,
-    deletedPost: globalState.posts.deletedPost
+    deletedPost: globalState.posts.deletedPost,
+    userObj: globalState.access.user,
   };
 }
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -84,7 +106,6 @@ const mapDispatchToProps = (dispatch) => {
         })
     },
     resetMe: () => {
-      //clean up both activePost(currrently open) and deletedPost(open and being deleted) states
       dispatch(resetActivePost());
       dispatch(resetDeletedPost());
     }

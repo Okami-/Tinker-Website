@@ -19,7 +19,9 @@ import CreatePost from "./components/Blog/CreatePost.jsx";
 import Fullscreen from "./components/Utilities/Fullscreen";
 import Blog from './components/Blog/PostsList';
 import PostShow from './components/Blog/PostShow';
-import PostsList from './components/Blog/PostsList'
+import PostsList from './components/Blog/PostsList';
+import EditPost from './components/Blog/EditPost';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 // Redux Store
 const store = configureStore();
@@ -31,7 +33,8 @@ ReactDOM.render(
 				<App />
 				<Header />
 				<Switch>
-					<Route path="/posts/new" component={CreatePost} />
+					<Route path="/posts/new/:id?" component={CreatePost} />
+					<Route path="/posts/edit/:id" component={EditPost} />
 					<Route path="/posts/:id" component={PostShow} />
 					<Route path="/posts" component={PostsList} />
 					<Route path="/profile" component={Profile} />

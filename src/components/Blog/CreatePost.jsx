@@ -3,16 +3,59 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPost } from '../../store/blog/actions';
-import ReactQuill from 'react-quill'; 
+import ReactQuill, { Quill } from 'react-quill'; 
 import 'react-quill/dist/quill.snow.css'
 
+Quill.register('modules/blotFormatter', BlotFormatter);
+import BlotFormatter, { AlignAction, DeleteAction, ImageSpec } from 'quill-blot-formatter';
+var BaseImageFormat = Quill.import('formats/image');
+
+const ImageFormatAttributesList = [
+    'alt',
+    'height',
+    'width',
+    'style'
+];
+
+hljs.configure({ 
+  languages: ['javascript', 'ruby', 'python', 'html']
+});
+
+
+class ImageFormat extends BaseImageFormat {
+  static formats(domNode) {
+    return ImageFormatAttributesList.reduce(function(formats, attribute) {
+      if (domNode.hasAttribute(attribute)) {
+        formats[attribute] = domNode.getAttribute(attribute);
+      }
+      return formats;
+    }, {});
+  }
+  format(name, value) {
+    if (ImageFormatAttributesList.indexOf(name) > -1) {
+      if (value) {
+        this.domNode.setAttribute(name, value);
+      } else {
+        this.domNode.removeAttribute(name);
+      }
+    } else {
+      super.format(name, value);
+    }
+  }
+}
+
+Quill.register(ImageFormat, true);
+                
 
 export class CreatePost extends Component {
-
+  getActions() {
+        return [AlignAction, DeleteAction];
+  }
   renderQuill({ input }) {
     return (
       <ReactQuill
         modules={CreatePost.modules} 
+        formats={CreatePost.formats}
         {...input}
         onChange={(newValue, delta, source) => {
           if (source === 'user') {
@@ -48,49 +91,58 @@ export class CreatePost extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props; 
+    const { handleSubmit } = this.props;
+    const author = this.props.userObj;
     return (
       <div id="create-post-wysiwyg">
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
-          name="title"
-          label="Title"
-          component={this.renderField} />
-        <Field
-          name="categories"
-          label="Categories"
-          component={this.renderField} />
-        {/*<Field
-          name="body"
-          label="body"
-          component={this.renderField} />*/}
-        <Field 
-          name="body" 
-          component={this.renderQuill}
-        />
-        <button type="submit" className="btn btn-primary">Create Post</button>
-        <Link className="ml-2 btn btn-danger" to="/">Cancel</Link>
-      </form>
+        <div className="container">
+        <h2 className="create-post-wysiwyg-title">Write Something Good</h2>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <Field
+            name="title"
+            label="Title"
+            component={this.renderField} />
+          <Field
+            name="categories"
+            label="Categories (seperate by commas)"
+            component={this.renderField} />
+          <Field 
+            name="body" 
+            label="Body"
+            component={this.renderQuill}
+          />
+          <button type="submit" className="btn btn-primary">Create Post</button>
+          <Link className="ml-2 btn btn-danger" to="/">Cancel</Link>
+        </form>
+        </div>
       </div>
     );
   }
 }
 
 CreatePost.modules = {
+  blotFormatter: {},
+  syntax: true,
   toolbar: [
     [{ 'header': [1, 2, false] }],
     ['bold', 'italic', 'underline','strike', 'blockquote'],
     [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
     ['link', 'image'],
-    ['clean']
-  ],
+    ['clean'],
+    ['code-block'],
+  ]
 }
 
-// comment 6
+CreatePost.formats = [
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video', 'width', 'code-block'
+]
+
 function validate(values) {
   let errors = {};
 
-  // comment 7
   if (!values.title) {
     errors.title = "Title is required."
   } else if (values.title.length < 3) {
@@ -107,9 +159,15 @@ function validate(values) {
   return errors;
 }
 
+const mapStateToProps = state => {
+  return {
+    userObj: state.access.user,
+  };
+};
+
 export default reduxForm({
     validate: validate,
     form: 'PostsNewForm',
 })(
-  connect(null, { createPost })
+  connect(mapStateToProps, { createPost })
   (CreatePost));

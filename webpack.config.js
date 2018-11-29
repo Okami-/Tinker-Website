@@ -96,6 +96,9 @@ module.exports = {
 	},
 	
 	plugins: [ 
+		new webpack.ProvidePlugin({
+    		'window.Quill': 'quill'
+ 		 }),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
 			title:"Tinker",
